@@ -1,2 +1,0 @@
-# Buffet
-Bona Petit.
