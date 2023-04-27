@@ -15,5 +15,3 @@ Here is an official contact list. Trust nothing else.
 Patreon : https://www.patreon.com/thevoniestmichael
 
 ***
-
-# (Not what you are looking for? Pop the Trap!)
