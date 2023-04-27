@@ -221,6 +221,7 @@ function BynVee(_cynPoint, _viB){
                     }
                     else if (bynCtep == 4){
                         // RulesForFun
+                        alert("Yeo!! This Bangs FR!!\nLet us drop some real heat on the house!");
                     }
                     CynPec(_cynPoint, -1, -1);
                     byn[BynBioCyn] = -1;
