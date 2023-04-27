@@ -1,7 +1,3 @@
-function Fade(){
-
-}
-
 let coulc = [];
 
 let oldTime;
