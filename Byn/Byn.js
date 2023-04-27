@@ -201,7 +201,7 @@ function BynVee(_cynPoint, _viB){
                 }
                 if (cyn.cynYnVB >= byn[BynBioVPoint] && byn[BynBioCyn] == _cynPoint){
                     if ('vibrate' in navigator) {
-                        navigator.vibrate(10);
+                        navigator.vibrate(5);
                     }
                     if (bynCtep == 0){
                         // Youtube
