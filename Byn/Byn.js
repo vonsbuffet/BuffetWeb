@@ -216,7 +216,8 @@ function BynVee(_cynPoint, _viB){
                         window.open("https://github.com/VonsBuffet/", "_blank");
                     }
                     else if (bynCtep == 3){
-                        // 
+                        // Patreon
+                        window.open("https://www.patreon.com/thevoniestmichael", "_blank");
                     }
                     else if (bynCtep == 4){
                         // RulesForFun
