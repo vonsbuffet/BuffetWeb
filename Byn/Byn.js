@@ -216,7 +216,7 @@ function BynVee(_cynPoint, _viB){
                         window.open("https://github.com/VonsBuffet/", "_blank");
                     }
                     else if (bynCtep == 3){
-                        // KickStarter
+                        // 
                     }
                     else if (bynCtep == 4){
                         // RulesForFun
