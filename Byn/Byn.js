@@ -203,28 +203,25 @@ function BynVee(_cynPoint, _viB){
                     if ('vibrate' in navigator) {
                         navigator.vibrate(10);
                     }
-                    alert("BANG");
                     if (bynCtep == 0){
                         // Youtube
                         window.open("https://youtube.com/@VonsBuffet", "_blank");
-                        CynPec(_cynPoint, -1, -1);
                     }
                     else if (bynCtep == 1){
                         // Shop
                         window.open("https://vonsbuffet.shop/", "_blank");
-                        CynPec(_cynPoint, -1, -1);
                     }
                     else if (bynCtep == 2){
-                        // RulesForFun
+                        // Sauce
+                        window.open("https://github.com/VonsBuffet/", "_blank");
                     }
                     else if (bynCtep == 3){
                         // KickStarter
                     }
                     else if (bynCtep == 4){
-                        // Sauce
-                        window.open("https://github.com/TheVoniestMichael/", "_blank");
-                        CynPec(_cynPoint, -1, -1);
+                        // RulesForFun
                     }
+                    CynPec(_cynPoint, -1, -1);
                     byn[BynBioCyn] = -1;
                 }
             }
