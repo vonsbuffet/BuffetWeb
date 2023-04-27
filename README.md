@@ -1,6 +1,6 @@
 # ViBer
 
-This is more then code, this is Von's Buffet running deeep.
+This is more then code, this is Von's Buffet!
 
 Von's Buffet will serve you everywhere, guaranteed!
 
