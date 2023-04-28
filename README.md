@@ -1,9 +1,8 @@
 # Buffet Web
 
-This is more then code, this is Von's Buffet!
+The idea is this will become an open source tool for Buffet fun!
 
-Von's Buffet will serve you everywhere, guaranteed!
-
+Your creativity is expected.
 Feel free to contribute, and together we will make this Bang!
 
 If you have any questions, please, contact us through your spirits.
