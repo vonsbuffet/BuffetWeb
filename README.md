@@ -13,6 +13,6 @@ Hmmmm... Okay then..
 
 Here is an official contact list. Trust nothing else.
 
-Patreon : https://www.patreon.com/thevoniestmichael
+Patreon : https://www.patreon.com/vonsbuffet/
 
 ***
