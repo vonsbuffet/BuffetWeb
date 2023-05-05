@@ -34,7 +34,7 @@ function BynCe(){
     bync.push([-1, -1, -1, 0, 0, 0, 0, 0, 0]); // [ 0 ] Youtube
     bync.push([-1, -1, -1, 0, 0, 0, 0, 0, 0]); // [ 1 ] Shop
     bync.push([-1, -1, -1, 0, 0, 0, 0, 0, 0]); // [ 2 ] RulesForFun
-    bync.push([-1, -1, -1, 0, 0, 0, 0, 0, 0]); // [ 3 ] KickStarter
+    bync.push([-1, -1, -1, 0, 0, 0, 0, 0, 0]); // [ 3 ] Patreon
     bync.push([-1, -1, -1, 0, 0, 0, 0, 0, 0]); // [ 4 ] Sauce
     bynPoint = 2;
 
@@ -217,7 +217,7 @@ function BynVee(_cynPoint, _viB){
                     }
                     else if (bynCtep == 3){
                         // Patreon
-                        window.open("https://www.patreon.com/thevoniestmichael", "_blank");
+                        window.open("https://www.patreon.com/vonsbuffet", "_blank");
                     }
                     else if (bynCtep == 4){
                         // RulesForFun
