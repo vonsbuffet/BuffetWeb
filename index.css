@@ -42,7 +42,7 @@ p {
     width: 9.09vw;
     height: 9.09vw;
     z-index: 2;
-    color:rgb(20, 20, 20);
+    color: rgb(20, 20, 20);
     border: 1px solid rgb(182, 34, 105);
 }
 
@@ -53,7 +53,7 @@ p {
     width: 9.09vw;
     height: 9.09vw;
     z-index: 2;
-    color: white;
+    color: rgb(75,75,75);
     border: 1px solid rgb(182, 34, 105);
 }
 
