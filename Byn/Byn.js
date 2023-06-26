@@ -209,11 +209,11 @@ function BynVee(_cynPoint, _viB){
                     }
                     else if (bynCtep == 1){
                         // Shop
-                        window.open("https://vonsbuffet.shop/", "_blank");
+                        alert("The shop is closed. You can rob it now.");
                     }
                     else if (bynCtep == 2){
                         // Sauce
-                        window.open("https://github.com/VonsBuffet/", "_blank");
+                        window.open("https://github.com/vonsbuffet?tab=repositories", "_blank");
                     }
                     else if (bynCtep == 3){
                         // Patreon
@@ -221,7 +221,7 @@ function BynVee(_cynPoint, _viB){
                     }
                     else if (bynCtep == 4){
                         // RulesForFun
-                        alert("Yeo!! This Bangs FR!!\nLet us drop some real heat on the house!");
+                        alert("Yeo!! You got skills!\n Maybe we should build a game?");
                     }
                     CynPec(_cynPoint, -1, -1);
                     byn[BynBioCyn] = -1;
