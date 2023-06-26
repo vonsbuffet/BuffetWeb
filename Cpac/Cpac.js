@@ -107,8 +107,8 @@ function Cpac(_cynPoint, _x, _y){
         // V
         viB = ViBVee;
 
-        vBox.style.color = "white";
-        bBox.style.color = "black";
+        vBox.style.color = "rgb(75,75,75)";
+        bBox.style.color = "rgb(20,20,20)";
         ynBVBox.style.display = "none";
         zoneBox.style.display = "none";
         if (bynPoint == 0)
@@ -151,8 +151,8 @@ function Cpac(_cynPoint, _x, _y){
         // B
         viB = ViBBe;
 
-        vBox.style.color = "black";
-        bBox.style.color = "white";
+        vBox.style.color = "rgb(20,20,20)";
+        bBox.style.color = "rgb(75,75,75)";
         ynBVBox.style.display = "block";
         zoneBox.style.display = "block";
         if (bynPoint == 0)
