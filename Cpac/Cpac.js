@@ -78,6 +78,7 @@ function CpacCe(){
     ynBVBoxCtep = document.getElementById("ynBVBoxCtep");
 
     zoneBox = document.getElementById("zoneBox");
+    zoneBox.style.display = "none";
     zoneBoxCpac = zoneBox.getBoundingClientRect();
     zoneBoxBCtep = document.getElementById("zoneBoxBCtep");
     let zoneBoxBCpac = zoneBoxBCtep.getBoundingClientRect();
@@ -154,7 +155,7 @@ function Cpac(_cynPoint, _x, _y){
         vBox.style.color = "rgb(20,20,20)";
         bBox.style.color = "rgb(75,75,75)";
         ynBVBox.style.display = "block";
-        zoneBox.style.display = "block";
+        zoneBox.style.display = "none";
         if (bynPoint == 0)
             byn0Box.style.border = "1px solid grey";
         else if (bynPoint == 1)
