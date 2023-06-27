@@ -196,11 +196,11 @@ function Cpac(_cynPoint, _x, _y){
         // Byn0
         if (viB == ViBBe){
     
-            byn0Box.style.border = "none";
-            byn1Box.style.border = "none";
-            byn2Box.style.border = "none";
-            byn3Box.style.border = "none";
-            byn4Box.style.border = "none";
+            byn0Box.style.border = "1px solid transparent";
+            byn1Box.style.border = "1px solid transparent";
+            byn2Box.style.border = "1px solid transparent";
+            byn3Box.style.border = "1px solid transparent";
+            byn4Box.style.border = "1px solid transparent";
 
             byn0Box.style.border = "1px solid grey";
 
@@ -240,11 +240,11 @@ function Cpac(_cynPoint, _x, _y){
         // Byn1
         if (viB == ViBBe){
     
-            byn0Box.style.border = "none";
-            byn1Box.style.border = "none";
-            byn2Box.style.border = "none";
-            byn3Box.style.border = "none";
-            byn4Box.style.border = "none";
+            byn0Box.style.border = "1px solid transparent";
+            byn1Box.style.border = "1px solid transparent";
+            byn2Box.style.border = "1px solid transparent";
+            byn3Box.style.border = "1px solid transparent";
+            byn4Box.style.border = "1px solid transparent";
 
             byn1Box.style.border = "1px solid grey";
 
@@ -284,11 +284,11 @@ function Cpac(_cynPoint, _x, _y){
         // Byn2
         if (viB == ViBBe){
     
-            byn0Box.style.border = "none";
-            byn1Box.style.border = "none";
-            byn2Box.style.border = "none";
-            byn3Box.style.border = "none";
-            byn4Box.style.border = "none";
+            byn0Box.style.border = "1px solid transparent";
+            byn1Box.style.border = "1px solid transparent";
+            byn2Box.style.border = "1px solid transparent";
+            byn3Box.style.border = "1px solid transparent";
+            byn4Box.style.border = "1px solid transparent";
 
             byn2Box.style.border = "1px solid grey";
 
@@ -328,11 +328,11 @@ function Cpac(_cynPoint, _x, _y){
         // Byn3
         if (viB == ViBBe){
     
-            byn0Box.style.border = "none";
-            byn1Box.style.border = "none";
-            byn2Box.style.border = "none";
-            byn3Box.style.border = "none";
-            byn4Box.style.border = "none";
+            byn0Box.style.border = "1px solid transparent";
+            byn1Box.style.border = "1px solid transparent";
+            byn2Box.style.border = "1px solid transparent";
+            byn3Box.style.border = "1px solid transparent";
+            byn4Box.style.border = "1px solid transparent";
 
             byn3Box.style.border = "1px solid grey";
 
@@ -372,11 +372,11 @@ function Cpac(_cynPoint, _x, _y){
         // Byn4
         if (viB == ViBBe){
     
-            byn0Box.style.border = "none";
-            byn1Box.style.border = "none";
-            byn2Box.style.border = "none";
-            byn3Box.style.border = "none";
-            byn4Box.style.border = "none";
+            byn0Box.style.border = "1px solid transparent";
+            byn1Box.style.border = "1px solid transparent";
+            byn2Box.style.border = "1px solid transparent";
+            byn3Box.style.border = "1px solid transparent";
+            byn4Box.style.border = "1px solid transparent";
 
             byn4Box.style.border = "1px solid grey";
 
