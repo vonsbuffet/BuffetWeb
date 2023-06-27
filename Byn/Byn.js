@@ -38,11 +38,11 @@ function BynCe(){
     bync.push([-1, -1, -1, 0, 0, 0, 0, 0, 0]); // [ 4 ] Sauce
     bynPoint = 2;
 
-    byn0Box.style.border = "none";
-    byn1Box.style.border = "none";
-    byn2Box.style.border = "none";
-    byn3Box.style.border = "none";
-    byn4Box.style.border = "none";
+    byn0Box.style.border = "1px solid transparent";
+    byn1Box.style.border = "1px solid transparent";
+    byn2Box.style.border = "1px solid transparent";
+    byn3Box.style.border = "1px solid transparent";
+    byn4Box.style.border = "1px solid transparent";
 
     byn2Box.style.border = "1px solid grey";
 }
@@ -267,9 +267,11 @@ function BynYnBV(_cynPoint, _viB){
         let newHeight = ynBVBoxCpac.bottom - cyn.cynY;
         if (newHeight > ynBVBoxCpac.height)
             newHeight = ynBVBoxCpac.height;
+        if (newHeight < 10)
+            newHeight = 10;
 
         ynBVBoxCtep.style.height = newHeight + "px";
-        ynBV = 2 + newHeight;
+        ynBV = 10 + newHeight;
 
     }
     else if (_viB == ViBCe){
@@ -277,9 +279,11 @@ function BynYnBV(_cynPoint, _viB){
         let newHeight = ynBVBoxCpac.bottom - cyn.cynY;
         if (newHeight > ynBVBoxCpac.height)
             newHeight = ynBVBoxCpac.height;
+        if (newHeight < 10)
+            newHeight = 10;
 
         ynBVBoxCtep.style.height = newHeight + "px";
-        ynBV = 2 + newHeight;
+        ynBV = newHeight;
 
     }
 }
