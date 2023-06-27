@@ -209,7 +209,7 @@ function BynVee(_cynPoint, _viB){
                     }
                     else if (bynCtep == 1){
                         // Shop
-                        alert("The shop is closed. You can rob it now.");
+                        alert("What if you could make money with this?");
                     }
                     else if (bynCtep == 2){
                         // Sauce
