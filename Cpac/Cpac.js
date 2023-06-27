@@ -113,15 +113,15 @@ function Cpac(_cynPoint, _x, _y){
         ynBVBox.style.display = "none";
         zoneBox.style.display = "none";
         if (bynPoint == 0)
-            byn0Box.style.border = "none";
+            byn0Box.style.border = "1px solid transparent";
         else if (bynPoint == 1)
-            byn1Box.style.border = "none";
+            byn1Box.style.border = "1px solid transparent";
         else if (bynPoint == 2)
-            byn2Box.style.border = "none";
+            byn2Box.style.border = "1px solid transparent";
         else if (bynPoint == 3)
-            byn3Box.style.border = "none";
+            byn3Box.style.border = "1px solid transparent";
         else if (bynPoint == 4)
-            byn4Box.style.border = "none";
+            byn4Box.style.border = "1px solid transparent";
 
         let cynCtep = 0;
         while (cynCtep < cync.length){
