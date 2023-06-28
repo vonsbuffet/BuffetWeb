@@ -43,7 +43,7 @@ p {
     height: 9.09vw;
     z-index: 2;
     color: rgb(20, 20, 20);
-    border: 1px solid rgb(20, 20, 20);
+    border: 1px solid transparent;
 }
 
 #bBox {
@@ -54,7 +54,7 @@ p {
     height: 9.09vw;
     z-index: 2;
     color: rgb(75,75,75);
-    border: 1px solid rgb(20, 20, 20);
+    border: 1px solid transparent;
 }
 
 #ynBVBox {
@@ -65,7 +65,7 @@ p {
     height: 50vh;
     transform: translate(50%, -50%);
     z-index: 2;
-    border: 1px dotted rgb(50, 50, 50);
+    border: 1px dotted transparent;
 }
 #ynBVBoxCtep {
     position: fixed;
