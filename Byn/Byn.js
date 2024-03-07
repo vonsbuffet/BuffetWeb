@@ -216,8 +216,8 @@ function BynVee(_cynPoint, _viB){
                         window.open("https://github.com/vonsbuffet?tab=repositories", "_blank");
                     }
                     else if (bynCtep == 3){
-                        // Patreon
-                        window.open("https://www.patreon.com/vonsbuffet", "_blank");
+                        // Website
+                        alert("New website dropping by end of the month. Vay Vuned!");
                     }
                     else if (bynCtep == 4){
                         // RulesForFun
