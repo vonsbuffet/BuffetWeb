@@ -103,7 +103,7 @@ html, body {
     position: fixed;
     bottom: 2px;
     left: 0;
-    width: 9.09vw;
+    width: 30vw;
     height: 9.09vw;
     z-index: 2;
     color: rgb(20, 20, 20);
@@ -115,7 +115,7 @@ html, body {
     bottom: 2px;
     left: 50vw;
 	transform: translate(-50%, 0);
-    width: 9.09vw;
+    width: 30vw;
     height: 9.09vw;
     z-index: 2;
     color: rgb(75,75,75);
@@ -126,7 +126,7 @@ html, body {
     position: fixed;
     bottom: 2px;
     right: 0;
-    width: 9.09vw;
+    width: 30vw;
     height: 9.09vw;
     z-index: 2;
     color: rgb(20, 20, 20);
