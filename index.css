@@ -59,22 +59,22 @@ html, body {
 
 #pdf {
 	position: absolute;
-    width: 100vw;
-    height: 100vh;
+	width: 100vw;
+	height: 100vh;
 	border: 0;
 	top: 0px;
 	left: 0px;
 	margin: 0;
 	padding: 0;
-    z-index: -1;
+	z-index: -1;
 }
 
 .infoo_Box {
 	position: absolute;
-    width: 33.33vh;
-    height: 33.33vh;
-    background-color: rgb(5,5,5);
-    z-index: 2;
+	width: 33.33vh;
+	height: 33.33vh;
+	background-color: rgb(5,5,5);
+	z-index: 2;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -84,10 +84,10 @@ html, body {
 	margin: 0;
 	padding: 0;
 	background-color: transparent;
-    color: rgb(200,200,200);
-    font-family: "Verdana";
-    font-weight: lighter;
-	font-size: 20px;	
+	color: rgb(200,200,200);
+	font-family: "Verdana";
+	font-weight: lighter;
+	font-size: 25px;	
 }
 
 .vbc {
