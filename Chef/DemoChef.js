@@ -324,7 +324,7 @@ window.onload = function start(){
 	chef_Canvas.height = 0;
 	DemoChefCe();
 	
-	alert("(Ayyyerr! Relax about the secure connection. This website doesn't collect infoo.)\n\nUse the VBC'c to make things happen!\nPop the Bangar's in the Trap for Extra Sauce...");
+	alert("Ayyyerr!\n\nUse the VBC'c to make things happen!\nPop the Bangar's in the Trap for Extra Sauce...");
 
 }
   
