@@ -28,7 +28,7 @@ function Draw(_newTime){
 		if (banner_ViB == 0)
 			element_Banner_Label.textContent = "Vou's Buffet?";
 		else if (banner_ViB == 1)
-			element_Banner_Label.textContent = "VBC'c r HOT! | Hurry!";
+			element_Banner_Label.textContent = "VBC'c r HOT! Cooking High and Slow";
 		else if (banner_ViB == 2)
 			element_Banner_Label.textContent = "BV = $2.10 + GooglePlay:Commission";	
 		else if (banner_ViB == 3)
