@@ -324,7 +324,7 @@ window.onload = function start(){
 	chef_Canvas.height = 0;
 	DemoChefCe();
 	
-	alert("Use VBC'c to make things happen!\nPop Bangar's in the Trap for Extra Sauce...");
+	alert("Use VBC'c to make things happen!");
 
 }
   
