@@ -86,9 +86,9 @@ function Cpac(_cynPoint, _x, _y){
 
         viB = ViBVee;
 
-        element_VBC_V.style.color = "rgb(75,75,75)";
-        element_VBC_B.style.color = "rgb(20,20,20)";
-        element_VBC_C.style.color = "rgb(20,20,20)";
+        element_VBC_V.style.color = "rgb(125,125,125)";
+        element_VBC_B.style.color = "rgb(50,50,50)";
+        element_VBC_C.style.color = "rgb(50,50,50)";
 
         if (bynPoint == 0)
             element_Byn_Youtube.style.border = "1px solid transparent";
@@ -115,9 +115,9 @@ function Cpac(_cynPoint, _x, _y){
 
         viB = -ViBBe;
 
-        element_VBC_V.style.color = "rgb(20,20,20)";
-        element_VBC_B.style.color = "rgb(75,75,75)";
-        element_VBC_C.style.color = "rgb(20,20,20)";
+        element_VBC_V.style.color = "rgb(50,50,50)";
+        element_VBC_B.style.color = "rgb(125,125,125)";
+        element_VBC_C.style.color = "rgb(50,50,50)";
 
         if (bynPoint == 0)
             element_Byn_Youtube.style.border = "1px solid grey";
@@ -155,9 +155,9 @@ function Cpac(_cynPoint, _x, _y){
 
 			viB = ViBCe;
 			
-			element_VBC_V.style.color = "rgb(20,20,20)";
-			element_VBC_B.style.color = "rgb(20,20,20)";
-			element_VBC_C.style.color = "rgb(75,75,75)";
+		        element_VBC_V.style.color = "rgb(50,50,50)";
+			element_VBC_B.style.color = "rgb(50,50,50)";
+		        element_VBC_C.style.color = "rgb(125,125,125)";
 			
 			if (bynPoint == 0)
 				element_Byn_Youtube.style.border = "1px solid transparent";
