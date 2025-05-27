@@ -286,9 +286,10 @@ function VonsBuffet() {
     const vpsPunchline = "Through our research in spacetime computing, </br>we strive to improve how your valuables are spatially transformed.".replace(/[\n\t\r\f\v\u00A0\u2000-\u200B\u2028\u2029\uFEFF\u0000]/g, '');
     const vpsFullDetails = `*-Information is everywhere.<br/><br/>
 	And much like running a computer program, information can be relocated from point 'A', to point 'B'.<br/><br/>
-	If we consider this a computation, it's only natural to say computational principles apply to real physical systems.<br/></br>
+	If we consider this a computation, it's only natural to say computation principles apply to real physical systems.<br/></br>
 	When applying a computational theory (i.e. VBC'c) to physical systems, it becomes clear that spacetime operates like an extremely capable computer.<br/><br/>
-	To address this computer's intracacies, Von's Buffet designed a business model that directly benefits from knowledge in this domain: Moving (physical) information, from point 'A' to point 'B', without information loss.-*
+	To address this computer's intracacies, Von's Buffet designed a business model that directly benefits from knowledge in this domain:</br></br>
+ 	Moving (physical) information, from point 'A' to point 'B', without information loss.-*
 	*-Currently operating in Calgary, Alberta, Canada, we're established as the definitive solution for high-volume operations where conventional infrastructure fails and time is critical.<br/><br/>
 	We routinely move assets valued over $800,000.<br/>
 	At what cost you ask?<br/>
