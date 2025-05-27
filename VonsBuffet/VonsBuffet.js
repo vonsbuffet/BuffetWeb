@@ -1,7 +1,4 @@
-// VonsBuffet.js (Revised for Slideshow width, absolute positioning, and full integration) 
-
-function deactivateVonsBuffetVisuals() { 
-    console.log("Deactivating VonsBuffet visuals for next scene..."); 
+function deactivateVonsBuffetVisuals() {
     const scrollableContainerVB = document.getElementById('scrollable-container'); 
     if (scrollableContainerVB) scrollableContainerVB.style.display = 'none'; 
     const darkMatterVB = document.getElementById('DarkMatter'); 
@@ -23,7 +20,6 @@ function deactivateVonsBuffetVisuals() {
 } 
 
 function reactivateVonsBuffetVisualsToStartupState() { 
-    console.log("Reactivating VonsBuffet visuals to startup state..."); 
     const scrollableContainerVB = document.getElementById('scrollable-container'); 
     if (scrollableContainerVB) scrollableContainerVB.style.display = 'block'; 
     const darkMatterVB = document.getElementById('DarkMatter'); 
@@ -98,7 +94,6 @@ function VonsBuffet() {
     let arrowVpsIcon = arrowVpsGroup ? arrowVpsGroup.querySelector('.arrow-shape.down') : null; 
     let arrowVpsLabel = arrowVpsGroup ? arrowVpsGroup.querySelector('.indicator-label') : null; 
 
-    // New "?" arrows
     const arrowVbcToLogoGroup = document.createElement('div');
     arrowVbcToLogoGroup.id = 'indicator-vbc-to-logo-arrow';
     arrowVbcToLogoGroup.classList.add('indicator-arrow-group');
@@ -241,7 +236,7 @@ function VonsBuffet() {
         const slides = parseSlides(fullDetailsHTML); 
 
         uniqueSlideshowIdCounter++; 
-        const currentSlideshowId = `slideshow-${buttonId}-${uniqueSlideshowIdCounter}`; // Make ID more specific 
+        const currentSlideshowId = `slideshow-${buttonId}-${uniqueSlideshowIdCounter}`;
         slideshowDataStore[currentSlideshowId] = slides; 
 
         return ` 
@@ -293,7 +288,7 @@ function VonsBuffet() {
 	And much like running a computer program, information can be relocated from point 'A', to point 'B'.<br/><br/>
 	If we consider this a computation, it's only natural to say computational principles apply to real physical systems.<br/>
 	When applying a computational theory (i.e. VBC'c) to physical systems, it becomes clear that spacetime operates like an extremely capable computer.<br/><br/>
-	To address this computer's intracacies, Von's Buffet designed a self sustaining business model that directly benefits from knowledge in this domain: Moving (physical) information, from point 'A' to point 'B', without information loss.-*
+	To address this computer's intracacies, Von's Buffet designed a business model that directly benefits from knowledge in this domain: Moving (physical) information, from point 'A' to point 'B', without information loss.-*
 	*-Currently operating in Calgary, Alberta, Canada, we're established as the definitive solution for high-volume operations where conventional infrastructure fails and time is critical.<br/><br/>
 	We routinely move assets valued over $800,000.<br/>
 	At what cost you ask?<br/>
@@ -416,7 +411,7 @@ function VonsBuffet() {
             if (isCurrentlyHidden) { 
                 slideshowContainer.style.position = 'absolute'; 
 
-                const topOffsetForSlideshow = actionButtonsContainer.offsetTop + actionButtonsContainer.offsetHeight + 15; // 15px margin 
+                const topOffsetForSlideshow = actionButtonsContainer.offsetTop + actionButtonsContainer.offsetHeight + 15;
 
                 slideshowContainer.style.top = `${topOffsetForSlideshow}px`; 
                 slideshowContainer.style.left = '0'; 
@@ -424,31 +419,25 @@ function VonsBuffet() {
 
                 slideshowContainer.style.display = 'flex'; 
 
-                // MODIFICATION: Dynamically set max-height for slideContentDisplay 
                 const scTop = slideshowContainer.getBoundingClientRect().top; 
                 const vpHeight = window.innerHeight; 
 
                 const scComputedStyle = window.getComputedStyle(slideshowContainer); 
-                const scPaddingBottom = parseFloat(scComputedStyle.paddingBottom) || 35; // From CSS 
+                const scPaddingBottom = parseFloat(scComputedStyle.paddingBottom) || 35;
 
                 const sdcComputedStyle = window.getComputedStyle(slideContentDisplay); 
-                // Use the current min-height from CSS (which might be responsive) 
-                const sdcMinHeight = parseFloat(sdcComputedStyle.minHeight) || 60; // Fallback to mobile min-height 
-                const sdcCssMaxHeight = parseFloat(sdcComputedStyle.maxHeight) || 600; // Fallback to CSS max-height (300px) 
+                const sdcMinHeight = parseFloat(sdcComputedStyle.minHeight) || 60;
+                const sdcCssMaxHeight = parseFloat(sdcComputedStyle.maxHeight) || 600;
 
-                const bottomPageMargin = 20; // A small buffer from the absolute bottom of the page viewport 
+                const bottomPageMargin = 20;
 
-                // Calculate the height budget for the slideContentDisplay based on available viewport space 
                 let heightBudgetForSCD = vpHeight - scTop - scPaddingBottom - bottomPageMargin; 
 
-                // Ensure it's at least its (potentially responsive) min-height 
                 heightBudgetForSCD = Math.max(sdcMinHeight, heightBudgetForSCD); 
 
-                // The new max-height should be the smaller of the CSS-defined max-height and the calculated budget 
                 const newMaxHeight = Math.min(sdcCssMaxHeight, heightBudgetForSCD); 
 
-                slideContentDisplay.style.maxHeight = `${newMaxHeight}px`; 
-                // console.log(`LearnMore Open - SCTop: ${scTop}, VPHeight: ${vpHeight}, Budget: ${heightBudgetForSCD}, CSSMax: ${sdcCssMaxHeight}, NewMax: ${newMaxHeight}, SDCMinH: ${sdcMinHeight}`); 
+                slideContentDisplay.style.maxHeight = `${newMaxHeight}px`;
 
                 learnMoreButton.textContent = 'Show less...'; 
                 currentSlideIndex = 0; 
@@ -456,7 +445,7 @@ function VonsBuffet() {
             } else { 
                 slideshowContainer.style.display = 'none'; 
                 learnMoreButton.textContent = 'Learn more...'; 
-                slideContentDisplay.style.maxHeight = ''; // Reset to CSS default 
+                slideContentDisplay.style.maxHeight = '';
             } 
         }); 
         learnMoreButton.addEventListener('keypress', (e) => { 
@@ -502,12 +491,11 @@ function VonsBuffet() {
     if (arrowVbcLabel) arrowVbcLabel.style.fontFamily = monospaceFont; 
     if (arrowVpsLabel) arrowVpsLabel.style.fontFamily = monospaceFont; 
 
-    // Set font family for new "?" arrows
     if (arrowVbcToLogoGroup) arrowVbcToLogoGroup.querySelector('.indicator-label').style.fontFamily = monospaceFont;
     if (arrowVpsToLogoGroup) arrowVpsToLogoGroup.querySelector('.indicator-label').style.fontFamily = monospaceFont;
 
 
-    const particles = []; // Defined here, populated by initializeParticles 
+    const particles = [];
 
     function getRandomNumber(min, max) { return Math.random() * (max - min) + min; } 
 
@@ -528,11 +516,11 @@ function VonsBuffet() {
     } 
 
     const numFullSections = 3; 
-    let currentSection = 1; // 0: VBC, 1: Logo, 2: VPS
+    let currentSection = 1;
     const sectionPositions = {
-        0: 0, // VBC section at the top
-        1: -window.innerHeight, // Logo section in the middle
-        2: -2 * window.innerHeight // VPS section at the bottom
+        0: 0,
+        1: -window.innerHeight,
+        2: -2 * window.innerHeight
     };
 
     let initialLayoutDone = false; 
@@ -542,29 +530,26 @@ function VonsBuffet() {
 
         const targetY = sectionPositions[sectionIndex];
         if (scrollableContainer) {
-            // Remove transition for instant initial display
             scrollableContainer.style.transition = initialLayoutDone ? 'transform 0.8s ease-in-out' : 'none'; 
             scrollableContainer.style.transform = `translateY(${targetY}px)`;
             currentSection = sectionIndex;
         }
 
-        // Hide/show regular arrows based on current section
         if (arrowVbcGroup) {
-            arrowVbcGroup.style.opacity = (currentSection === 0 || currentSection === 2) ? '0' : '1'; // Hide when at VBC or VPS
+            arrowVbcGroup.style.opacity = (currentSection === 0 || currentSection === 2) ? '0' : '1';
             arrowVbcGroup.style.pointerEvents = (currentSection === 0 || currentSection === 2) ? 'none' : 'auto';
         }
         if (arrowVpsGroup) {
-            arrowVpsGroup.style.opacity = (currentSection === 0 || currentSection === 2) ? '0' : '1'; // Hide when at VBC or VPS
+            arrowVpsGroup.style.opacity = (currentSection === 0 || currentSection === 2) ? '0' : '1';
             arrowVpsGroup.style.pointerEvents = (currentSection === 0 || currentSection === 2) ? 'none' : 'auto';
         }
 
-        // Hide/show "?" arrows based on current section
         if (arrowVbcToLogoGroup) {
-            arrowVbcToLogoGroup.style.opacity = (currentSection === 0) ? '1' : '0'; // Show only at VBC section
+            arrowVbcToLogoGroup.style.opacity = (currentSection === 0) ? '1' : '0';
             arrowVbcToLogoGroup.style.pointerEvents = (currentSection === 0) ? 'auto' : 'none';
         }
         if (arrowVpsToLogoGroup) {
-            arrowVpsToLogoGroup.style.opacity = (currentSection === 2) ? '1' : '0'; // Show only at VPS section
+            arrowVpsToLogoGroup.style.opacity = (currentSection === 2) ? '1' : '0';
             arrowVpsToLogoGroup.style.pointerEvents = (currentSection === 2) ? 'auto' : 'none';
         }
     }
@@ -599,7 +584,7 @@ function VonsBuffet() {
         } 
 
         const commonTextWidthMobile = '90vw'; 
-        const commonTextWidthDesktop = '60vh'; // Adjusted width 
+        const commonTextWidthDesktop = '60vh';
         const desktopBreakpoint = 768; 
 
         if (aboveLogoTextDiv) { 
@@ -629,9 +614,8 @@ function VonsBuffet() {
             logo.style.height = (screenW >= desktopBreakpoint && isLandscape) ? '25vh' : '20vh'; 
             logo.style.width = 'auto'; 
         } 
-        // Increased size for easier tapping
-        const arrowPadding = 20; // Extra padding around the arrow shape/label
-        const estimatedArrowRenderedHeight = 60 + (2 * arrowPadding); // Original height + padding
+        const arrowPadding = 20;
+        const estimatedArrowRenderedHeight = 60 + (2 * arrowPadding);
         const arrowMarginFromViewportEdge = (screenW < desktopBreakpoint && !isLandscape) ? 25 : 40; 
 
         if (arrowVbcGroup) { 
@@ -642,12 +626,11 @@ function VonsBuffet() {
             arrowVbcGroup.style.cursor = 'pointer'; 
             arrowVbcGroup.setAttribute('role', 'button');
             arrowVbcGroup.setAttribute('aria-label', 'Scroll to VBC section');
-            arrowVbcGroup.style.padding = `${arrowPadding}px`; // Add padding
-            arrowVbcGroup.style.boxSizing = 'content-box'; // Ensure padding adds to total size
-            arrowVbcGroup.addEventListener('click', () => navigateToSection(0)); 
-            // Initially hidden
+            arrowVbcGroup.style.padding = `${arrowPadding}px`;
+            arrowVbcGroup.style.boxSizing = 'content-box';
+            arrowVbcGroup.addEventListener('click', () => navigateToSection(0));
             arrowVbcGroup.style.opacity = '0';
-            arrowVbcGroup.style.transition = 'opacity 0.5s ease-in-out'; // Add transition for fade-in
+            arrowVbcGroup.style.transition = 'opacity 0.5s ease-in-out';
         } 
         if (arrowVpsGroup) { 
             arrowVpsGroup.style.position = 'absolute'; 
@@ -657,30 +640,27 @@ function VonsBuffet() {
             arrowVpsGroup.style.cursor = 'pointer'; 
             arrowVpsGroup.setAttribute('role', 'button');
             arrowVpsGroup.setAttribute('aria-label', 'Scroll to VPS section');
-            arrowVpsGroup.style.padding = `${arrowPadding}px`; // Add padding
-            arrowVpsGroup.style.boxSizing = 'content-box'; // Ensure padding adds to total size
+            arrowVpsGroup.style.padding = `${arrowPadding}px`;
+            arrowVpsGroup.style.boxSizing = 'content-box';
             arrowVpsGroup.addEventListener('click', () => navigateToSection(2)); 
-            // Initially hidden
             arrowVpsGroup.style.opacity = '0';
-            arrowVpsGroup.style.transition = 'opacity 0.5s ease-in-out'; // Add transition for fade-in
+            arrowVpsGroup.style.transition = 'opacity 0.5s ease-in-out';
         } 
 
-        // Position the new "?" arrows
         if (arrowVbcToLogoGroup) {
             arrowVbcToLogoGroup.style.position = 'absolute';
-            // Position it at the top of the VBC section with some margin
             arrowVbcToLogoGroup.style.top = `${arrowMarginFromViewportEdge}px`; 
             arrowVbcToLogoGroup.style.left = '50%';
             arrowVbcToLogoGroup.style.transform = 'translateX(-50%)';
             arrowVbcToLogoGroup.style.cursor = 'pointer';
             arrowVbcToLogoGroup.setAttribute('role', 'button');
             arrowVbcToLogoGroup.setAttribute('aria-label', 'Return to VBLogo section');
-            arrowVbcToLogoGroup.style.padding = `${arrowPadding}px`; // Add padding
-            arrowVbcToLogoGroup.style.boxSizing = 'content-box'; // Ensure padding adds to total size
+            arrowVbcToLogoGroup.style.padding = `${arrowPadding}px`;
+            arrowVbcToLogoGroup.style.boxSizing = 'content-box';
             arrowVbcToLogoGroup.addEventListener('click', () => navigateToSection(1)); 
             // Initially hidden
             arrowVbcToLogoGroup.style.opacity = '0';
-            arrowVbcToLogoGroup.style.transition = 'opacity 0.5s ease-in-out'; // Add transition for fade-in
+            arrowVbcToLogoGroup.style.transition = 'opacity 0.5s ease-in-out';
         }
         if (arrowVpsToLogoGroup) {
             arrowVpsToLogoGroup.style.position = 'absolute';
@@ -690,12 +670,12 @@ function VonsBuffet() {
             arrowVpsToLogoGroup.style.cursor = 'pointer';
             arrowVpsToLogoGroup.setAttribute('role', 'button');
             arrowVpsToLogoGroup.setAttribute('aria-label', 'Return to VBLogo section');
-            arrowVpsToLogoGroup.style.padding = `${arrowPadding}px`; // Add padding
-            arrowVpsToLogoGroup.style.boxSizing = 'content-box'; // Ensure padding adds to total size
+            arrowVpsToLogoGroup.style.padding = `${arrowPadding}px`;
+            arrowVpsToLogoGroup.style.boxSizing = 'content-box';
             arrowVpsToLogoGroup.addEventListener('click', () => navigateToSection(1)); 
             // Initially hidden
             arrowVpsToLogoGroup.style.opacity = '0';
-            arrowVpsToLogoGroup.style.transition = 'opacity 0.5s ease-in-out'; // Add transition for fade-in
+            arrowVpsToLogoGroup.style.transition = 'opacity 0.5s ease-in-out';
         }
 
 
@@ -737,7 +717,7 @@ function VonsBuffet() {
         }); 
 
         if (!initialLayoutDone) { 
-            navigateToSection(1); // Start at the logo section
+            navigateToSection(1);
             initialLayoutDone = true; 
         } 
     } 
@@ -754,10 +734,8 @@ function VonsBuffet() {
         if (belowLogoTextDiv1) belowLogoTextDiv1.style.opacity = 1; 
         if (logo) logo.style.opacity = 1; 
         
-        // Arrows will be shown/hidden by navigateToSection
-        // Ensure arrows are visible and then opacity is set correctly based on section
-        if (arrowVbcGroup) arrowVbcGroup.style.opacity = (currentSection === 0 || currentSection === 2) ? '0' : '1'; // Hide when at VBC or VPS
-        if (arrowVpsGroup) arrowVpsGroup.style.opacity = (currentSection === 0 || currentSection === 2) ? '0' : '1'; // Hide when at VBC or VPS
+        if (arrowVbcGroup) arrowVbcGroup.style.opacity = (currentSection === 0 || currentSection === 2) ? '0' : '1';
+        if (arrowVpsGroup) arrowVpsGroup.style.opacity = (currentSection === 0 || currentSection === 2) ? '0' : '1';
         if (arrowVbcToLogoGroup) arrowVbcToLogoGroup.style.opacity = (currentSection === 0) ? '1' : '0';
         if (arrowVpsToLogoGroup) arrowVpsToLogoGroup.style.opacity = (currentSection === 2) ? '1' : '0';
 
@@ -766,8 +744,6 @@ function VonsBuffet() {
         }); 
 
     }, 600); 
-
-    // Removed pointer event handlers for dragging, as we are now using buttons for navigation.
 
     let backgroundColor = 'black'; 
     const flashInterval = 7000; let flashDuration = 2000; let isFlashingWhite = false; 
@@ -805,7 +781,7 @@ function VonsBuffet() {
 
         const logoScreenCenter = actualGetLogoScreenCenter(); 
         const dmStyleLeft = logoScreenCenter.x - darkMatter.width / 2; 
-        const dmStyleTop = (logoScreenCenter.y - darkMatter.height / 2) - sectionPositions[currentSection]; // Adjusted based on current section
+        const dmStyleTop = (logoScreenCenter.y - darkMatter.height / 2) - sectionPositions[currentSection];
         darkMatter.style.left = `${dmStyleLeft}px`; 
         darkMatter.style.top = `${dmStyleTop}px`; 
         darkMatter_Context.clearRect(0, 0, darkMatter.width, darkMatter.height); 
@@ -980,7 +956,6 @@ function VonsBuffet() {
                 arrowVpsIcon.style.borderTopColor = textColor; 
             } 
 
-            // Update color for new "?" arrows
             if (arrowVbcToLogoGroup) {
                 arrowVbcToLogoGroup.querySelector('.indicator-label').style.color = textColor;
                 arrowVbcToLogoGroup.querySelector('.arrow-shape.down').style.borderTopColor = textColor;
@@ -1013,7 +988,6 @@ function VonsBuffet() {
                 if (sc.style.display !== 'none' && sc.style.position === 'absolute') { 
                     const sdc = sc.querySelector('.slide-content-display'); 
                     if (sdc) { 
-                        // MODIFICATION: Recalculate max-height for sdc on resize 
                         const scTop = sc.getBoundingClientRect().top; 
                         const vpHeight = window.innerHeight; 
 
@@ -1021,7 +995,7 @@ function VonsBuffet() {
                         const scPaddingBottom = parseFloat(scComputedStyle.paddingBottom) || 35; 
 
                         const sdcComputedStyle = window.getComputedStyle(sdc); 
-                        const sdcMinHeight = parseFloat(sdcComputedStyle.minHeight) || 60; // Fallback to mobile min-height 
+                        const sdcMinHeight = parseFloat(sdcComputedStyle.minHeight) || 60;
                         const sdcCssMaxHeight = parseFloat(sdcComputedStyle.maxHeight) || 300; 
 
                         const bottomPageMargin = 20; 
@@ -1030,8 +1004,7 @@ function VonsBuffet() {
                         heightBudgetForSCD = Math.max(sdcMinHeight, heightBudgetForSCD); 
 
                         const newResizedMaxHeight = Math.min(sdcCssMaxHeight, heightBudgetForSCD); 
-                        sdc.style.maxHeight = `${newResizedMaxHeight}px`; 
-                        // console.log(`Resize - SCTop: ${scTop}, VPHeight: ${vpHeight}, Budget: ${heightBudgetForSCD}, CSSMax: ${sdcCssMaxHeight}, NewMax: ${newResizedMaxHeight}, SDCMinH: ${sdcMinHeight}`); 
+                        sdc.style.maxHeight = `${newResizedMaxHeight}px`;
                     } 
                 } 
             }); 
