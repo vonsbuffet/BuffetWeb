@@ -1,13 +1,11 @@
 function Star() {
     deactivateVonsBuffetVisuals();
 
-    const dpr = window.devicePixelRatio || 1; // Get the device pixel ratio
+    const dpr = window.devicePixelRatio || 1;
 
     let cpac2 = document.getElementById('Cpac2');
-    // Set actual drawing surface size (scaled by DPR)
     cpac2.width = window.innerWidth * dpr;
     cpac2.height = window.innerHeight * dpr;
-    // Set CSS display size
     cpac2.style.width = `${window.innerWidth}px`;
     cpac2.style.height = `${window.innerHeight}px`;
 
@@ -16,15 +14,13 @@ function Star() {
         displayMessageBox("Background Canvas context not supported for Cpac2!");
         return;
     }
-    cpac2_Context.scale(dpr, dpr); // Scale the context
+    cpac2_Context.scale(dpr, dpr);
     cpac2.style.display = 'block';
 
 
     let cpac = document.getElementById('Cpac');
-    // Set actual drawing surface size (scaled by DPR)
     cpac.width = window.innerWidth * dpr;
     cpac.height = window.innerHeight * dpr;
-    // Set CSS display size
     cpac.style.width = `${window.innerWidth}px`;
     cpac.style.height = `${window.innerHeight}px`;
 
@@ -33,14 +29,11 @@ function Star() {
         displayMessageBox("Canvas context not supported for Cpac!");
         return;
     }
-    cpac_Context.scale(dpr, dpr); // Scale the context
-
-    // ClearRect now uses logical (CSS) dimensions because context is scaled
+    cpac_Context.scale(dpr, dpr);
     cpac_Context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
     const isMobile = window.innerWidth < 768;
 
-    // baseScreenDim uses logical dimensions
     const baseScreenDim = Math.min(window.innerWidth, window.innerHeight);
     const sizeScaleFactor = isMobile ? (baseScreenDim / 600) : 1;
     const speedScaleFactor = isMobile ? 0.7 : 1;
@@ -48,14 +41,12 @@ function Star() {
     function getRandomNumber(min, max) { return Math.random() * (max - min) + min; }
 
     function drawStaticBackground(ctx) {
-        // ClearRect uses logical dimensions (window.innerWidth/Height as canvas is fullscreen)
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         const numStars = isMobile ? 100 : 200;
         const minStarRadius = isMobile ? 0.5 : 1;
         const maxStarRadius = isMobile ? 2 : 4;
 
         for (var i = 0; i < numStars; i++) {
-            // x and y are within logical canvas width/height
             var x = getRandomNumber(0, window.innerWidth);
             var y = getRandomNumber(0, window.innerHeight);
             var radius = getRandomNumber(minStarRadius, maxStarRadius);
@@ -70,7 +61,6 @@ function Star() {
     }
     drawStaticBackground(cpac2_Context);
 
-    // centerX and centerY are based on logical (CSS) dimensions
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
     const initialCentralObjectRadius = 50 * sizeScaleFactor;
@@ -80,7 +70,6 @@ function Star() {
 
     const introRevealDuration = 1500;
     let introRevealStartTime = performance.now();
-    // introRevealCurrentRadius logic uses logical dimensions
     let introRevealCurrentRadius = Math.sqrt(window.innerWidth * window.innerWidth + window.innerHeight * window.innerHeight) / (isMobile ? 1.5 : 1.8);
 
     let animationState = 'INTRO_REVEAL';
@@ -144,11 +133,10 @@ function Star() {
     function handleCanvasClick(event) {
         if (!starSceneActive) return;
 
-        const rect = cpac.getBoundingClientRect(); // Gives position in CSS pixels
-        const clickX = event.clientX - rect.left; // clickX is in CSS pixels
-        const clickY = event.clientY - rect.top;   // clickY is in CSS pixels
+        const rect = cpac.getBoundingClientRect();
+        const clickX = event.clientX - rect.left;
+        const clickY = event.clientY - rect.top;
 
-        // All calculations here use CSS pixel values as zoomFactor is applied by context scale
         if (animationState === 'NORMAL_ORBIT' && showLabels) {
             const distanceCentral = Math.sqrt((clickX - centerX) ** 2 + (clickY - centerY) ** 2);
             if (distanceCentral < (centralObjectCurrentRadius * zoomFactor) * (isMobile ? 1.5 : 1)) {
@@ -158,7 +146,6 @@ function Star() {
             }
 
             for (let planet of planets) {
-                // Planet positions are calculated in logical space before zoom is applied by context
                 const planetX = centerX + (planet.radius * Math.cos(planet.angle)) * zoomFactor;
                 const planetY = centerY + (planet.radius * Math.sin(planet.angle)) * zoomFactor;
                 const distancePlanet = Math.sqrt((clickX - planetX) ** 2 + (clickY - planetY) ** 2);
@@ -204,7 +191,6 @@ function Star() {
                 zoomStage = 'BLACKHOLE';
                 targetBlackHoleModelRadiusStart = initialApparentBlackHolePixelRadius / blackHoleRevealZoomFactor;
                 currentBlackHoleRadius = targetBlackHoleModelRadiusStart;
-                // screenMaxRadiusToCover uses logical dimensions
                 const screenMaxRadiusToCover = Math.max(window.innerWidth, window.innerHeight);
                 targetBlackHoleModelRadiusEnd = screenMaxRadiusToCover / blackHoleFullZoomFactor;
             }
@@ -252,12 +238,11 @@ function Star() {
         const planetData = [
             { name: "Youtube", url: "https://www.youtube.com/@VonsBuffet" },
             { name: "Github", url: "https://github.com/vonsbuffet?tab=repositories" },
-            { name: "Email", url: "https://www.google.com/search?q=Earth+planet" }, // Note: URL seems like a placeholder
+            { name: "Email", url: "https://www.google.com/search?q=Earth+planet" },
             { name: "Universal Theory", url: "https://www.google.com/search?q=Does+A+Universal+Theory+Exist" },
-            { name: "Symmetric Encryption", url: "https://www.google.com/search?q=Is+aes+secure+against+quantum+computing" }
+            { name: "Encryption", url: "https://www.google.com/search?q=Is+aes+secure+against+quantum+computing" }
         ];
         numPlanets = planetData.length;
-        // Radii and sizes are based on logical dimensions
         const minPlanetRadius = 100 * sizeScaleFactor;
         const maxPlanetRadius = Math.min(window.innerWidth, window.innerHeight) / 2 - 30 * sizeScaleFactor;
         const minPlanetSize = 20 * sizeScaleFactor;
@@ -295,25 +280,23 @@ function Star() {
         }
         for (let planet of planets) {
             planet.angle += planet.speed;
-            drawPlanet(planet); // Uses logical units
+            drawPlanet(planet);
             if (showLabels) {
-                drawPlanetLabel(planet, cpac_Context); // Uses logical units
+                drawPlanetLabel(planet, cpac_Context);
             }
         }
         if (showLabels) {
-            drawCentralObjectLabel(centralObjectName, cpac_Context); // Uses logical units
+            drawCentralObjectLabel(centralObjectName, cpac_Context);
         }
     }
 
     function drawCentralObject() {
         cpac_Context.beginPath();
-        // centerX, centerY, centralObjectCurrentRadius are in logical units
         cpac_Context.arc(centerX, centerY, centralObjectCurrentRadius, 0, Math.PI * 2);
         cpac_Context.fillStyle = 'pink';
         cpac_Context.fill();
         if (blackHoleVisible) {
             cpac_Context.beginPath();
-            // currentBlackHoleRadius is a model radius, scaled appropriately with zoomFactor already by context
             cpac_Context.arc(centerX, centerY, currentBlackHoleRadius, 0, Math.PI * 2);
             cpac_Context.fillStyle = 'black';
             cpac_Context.fill();
@@ -325,14 +308,12 @@ function Star() {
         context.fillStyle = 'white';
         context.textAlign = 'center';
         context.textBaseline = 'bottom';
-        // labelYPosition calculation uses logical units
         const labelYPosition = centerY - (centralObjectCurrentRadius + (5 * sizeScaleFactor) / zoomFactor);
         context.fillText(name, centerX, labelYPosition);
     }
 
     function drawCentralFadeObject() {
         cpac_Context.beginPath();
-        // explosionSunRadius is in logical units
         cpac_Context.arc(centerX, centerY, explosionSunRadius, 0, Math.PI * 2);
         cpac_Context.fillStyle = 'purple';
         cpac_Context.globalAlpha = explosionSunAlpha;
@@ -344,7 +325,6 @@ function Star() {
     }
 
     function drawPlanet(planet) {
-        // x, y, planet.size are in logical units
         const x = centerX + planet.radius * Math.cos(planet.angle);
         const y = centerY + planet.radius * Math.sin(planet.angle);
         cpac_Context.beginPath();
@@ -358,7 +338,6 @@ function Star() {
         context.fillStyle = 'grey';
         context.textAlign = 'center';
         context.textBaseline = 'bottom';
-        // x, y, labelYPosition are in logical units
         const x = centerX + planet.radius * Math.cos(planet.angle);
         const y = centerY + planet.radius * Math.sin(planet.angle);
         const labelYPosition = y - (planet.size + (5 * sizeScaleFactor) / zoomFactor);
@@ -369,10 +348,10 @@ function Star() {
         if (explosionParticles.length === 0) {
             for (let i = 0; i < explosionParticleCount; i++) {
                 explosionParticles.push({
-                    x: centerX, y: centerY, // Logical center
+                    x: centerX, y: centerY,
                     vx: ((Math.random() * 4) - 2) * speedScaleFactor,
                     vy: ((Math.random() * 4) - 2) * speedScaleFactor,
-                    size: getRandomNumber(2, 5) * sizeScaleFactor, // Logical size
+                    size: getRandomNumber(2, 5) * sizeScaleFactor,
                     color: `hsl(${Math.random() * 360}, 100%, 80%)`,
                     alpha: 1
                 });
@@ -402,13 +381,13 @@ function Star() {
             if (explosionProgress > 0.5) {
                 const tempAlpha = Math.max(0, (explosionSunAlpha - 0.5) * 2);
                 cpac_Context.globalAlpha = tempAlpha;
-                normalOrbit(); // Draws in logical units
+                normalOrbit();
                 cpac_Context.globalAlpha = 1;
                 if (showLabels) {
-                    drawCentralObjectLabel(centralObjectName, cpac_Context); // Draws in logical units
+                    drawCentralObjectLabel(centralObjectName, cpac_Context);
                 }
             }
-            drawCentralFadeObject(); // Draws in logical units
+            drawCentralFadeObject();
         }
 
         if (explosionProgress >= 1) {
@@ -425,7 +404,6 @@ function Star() {
             particle.y += particle.vy;
             particle.alpha = 1 - explosionProgress;
             cpac_Context.beginPath();
-            // Particle x, y, size are in logical units
             cpac_Context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
             cpac_Context.fillStyle = particle.color;
             cpac_Context.globalAlpha = particle.alpha;
@@ -442,21 +420,17 @@ function Star() {
             }
             return;
         }
-
-        // ClearRect uses logical dimensions (window.innerWidth/Height)
         cpac_Context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
         if (animationState === 'INTRO_REVEAL') {
             const elapsedIntroTime = performance.now() - introRevealStartTime;
             let introProgress = Math.min(1, elapsedIntroTime / introRevealDuration);
 
-            // maxRadiusForIntro uses logical dimensions
             const maxRadiusForIntro = Math.sqrt(window.innerWidth * window.innerWidth + window.innerHeight * window.innerHeight) / (isMobile ? 1.5 : 1.8);
             introRevealCurrentRadius = maxRadiusForIntro * (1 - introProgress);
 
             if (introRevealCurrentRadius > 0) {
                 cpac_Context.beginPath();
-                // centerX, centerY, introRevealCurrentRadius are in logical units
                 cpac_Context.arc(centerX, centerY, introRevealCurrentRadius, 0, Math.PI * 2);
                 cpac_Context.fillStyle = 'black';
                 cpac_Context.fill();
@@ -473,12 +447,11 @@ function Star() {
             }
         } else {
             cpac_Context.save();
-            // Translate and scale for zoomFactor operate on logical units
             cpac_Context.translate(centerX, centerY);
             cpac_Context.scale(zoomFactor, zoomFactor);
             cpac_Context.translate(-centerX, -centerY);
 
-            drawCentralObject(); // Draws in logical units
+            drawCentralObject();
 
             if (animationState === 'NORMAL_ORBIT') {
                 normalOrbit();
@@ -497,14 +470,14 @@ function Star() {
 
                     if (planet.radius >= centralObjectCurrentRadius + planet.size * 0.5) {
                         allPlanetsCollided = false;
-                        drawPlanet(planet); // Draws in logical units
+                        drawPlanet(planet);
                         if (showLabels) {
-                            drawPlanetLabel(planet, cpac_Context); // Draws in logical units
+                            drawPlanetLabel(planet, cpac_Context);
                         }
                     }
                 }
                 if (showLabels) {
-                    drawCentralObjectLabel(centralObjectName, cpac_Context); // Draws in logical units
+                    drawCentralObjectLabel(centralObjectName, cpac_Context);
                 }
                 if (allPlanetsCollided) {
                     animationState = 'COLLAPSE_SUN';
@@ -533,7 +506,7 @@ function Star() {
                     }
                 }
             } else if (animationState === 'EXPLOSION') {
-                drawExplosion(); // Draws in logical units
+                drawExplosion();
             } else if (animationState === 'ZOOMING_SUN' || animationState === 'ZOOMING_BLACKHOLE' || animationState === 'BLACK_SCREEN') {
                 updateZoom();
             } else if (animationState === 'RESET') {
@@ -549,7 +522,6 @@ function Star() {
 
         if (animationState === 'BLACK_SCREEN' && fadeAlpha > 0 && starSceneActive) {
             cpac_Context.fillStyle = `rgba(0, 0, 0, ${fadeAlpha})`;
-            // fillRect uses logical dimensions (window.innerWidth/Height)
             cpac_Context.fillRect(0, 0, window.innerWidth, window.innerHeight);
         }
 
