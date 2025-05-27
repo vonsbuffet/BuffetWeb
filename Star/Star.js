@@ -289,18 +289,17 @@ function Star(){
 		}
 	}
 
-	function drawCentralObjectLabel(name, context) { // As per your provided code
-        // Responsive font size for labels
-        const labelFontSize = isMobile ? '16px Arial' : '24px Arial';
-		context.font = labelFontSize;
+	function drawCentralObjectLabel(name, context) {
+		context.font = isMobile ? '16px Arial' : '24px Arial';
+		context.fontFamily = "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace";
 		context.fillStyle = 'white';
 		context.textAlign = 'center';
 		context.textBaseline = 'bottom';
-		const labelYPosition = centerY - (centralObjectCurrentRadius + (5 * sizeScaleFactor) / zoomFactor) ; // Scaled label position
+		const labelYPosition = centerY - (centralObjectCurrentRadius + (5 * sizeScaleFactor) / zoomFactor) ;
 		context.fillText(name, centerX, labelYPosition);
 	}
 
-	function drawCentralFadeObject() { // As per your provided code
+	function drawCentralFadeObject() {
 		cpac_Context.beginPath();
 		cpac_Context.arc(centerX, centerY, explosionSunRadius, 0, Math.PI * 2);
 		cpac_Context.fillStyle = 'purple';
@@ -312,7 +311,7 @@ function Star(){
 		}
 	}
 
-	function drawPlanet(planet) { // As per your provided code
+	function drawPlanet(planet) {
 		const x = centerX + planet.radius * Math.cos(planet.angle);
 		const y = centerY + planet.radius * Math.sin(planet.angle);
 		cpac_Context.beginPath();
@@ -321,27 +320,26 @@ function Star(){
 		cpac_Context.fill();
 	}
 
-	function drawPlanetLabel(planet, context) { // As per your provided code
-        // Responsive font size for labels
-        const planetLabelFontSize = isMobile ? '14px Arial' : '21px Arial';
-		context.font = planetLabelFontSize;
+	function drawPlanetLabel(planet, context) {
+		context.font = isMobile ? '14px Arial' : '21px Arial';
+		context.fontFamily = "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace";
 		context.fillStyle = 'grey';
 		context.textAlign = 'center';
 		context.textBaseline = 'bottom';
 		const x = centerX + planet.radius * Math.cos(planet.angle);
 		const y = centerY + planet.radius * Math.sin(planet.angle);
-		const labelYPosition = y - (planet.size + (5 * sizeScaleFactor) / zoomFactor); // Scaled label position
+		const labelYPosition = y - (planet.size + (5 * sizeScaleFactor) / zoomFactor);
 		context.fillText(planet.name, x, labelYPosition);
 	}
 
-	function drawExplosion() { // As per your provided code (this is the key function to preserve)
+	function drawExplosion() {
 		if (explosionParticles.length === 0) {
 			for (let i = 0; i < explosionParticleCount; i++) {
 				explosionParticles.push({
 					x: centerX, y: centerY,
-					vx: ((Math.random() * 4) - 2) * speedScaleFactor, // Scaled velocity
-					vy: ((Math.random() * 4) - 2) * speedScaleFactor, // Scaled velocity
-					size: getRandomNumber(2, 5) * sizeScaleFactor, // Scaled size
+					vx: ((Math.random() * 4) - 2) * speedScaleFactor,
+					vy: ((Math.random() * 4) - 2) * speedScaleFactor,
+					size: getRandomNumber(2, 5) * sizeScaleFactor,
 					color: `hsl(${Math.random() * 360}, 100%, 80%)`,
 					alpha: 1
 				});
@@ -364,7 +362,6 @@ function Star(){
 				showLabels = true;
 			}
 		} else if (sunViB == -1){
-            // This is the line from your specific version for the fading sun's radius
 			explosionSunRadius = collapsedCentralObjectRadius + (initialCentralObjectRadius * 3.5 - collapsedCentralObjectRadius) * sunExplosionProgress;
 			explosionSunAlpha = 1 - explosionProgress;
 			if (explosionSunAlpha < 0) explosionSunAlpha = 0;
@@ -384,9 +381,8 @@ function Star(){
 		if (explosionProgress >= 1) {
 			animationState = 'NORMAL_ORBIT';
 			explosionParticles = [];
-            centralObjectCurrentRadius = initialCentralObjectRadius;
-            sunViB = 1;
-			// resetPlanets(); // Your code has resetPlanets() called when sunViB == 1 condition met.
+            		centralObjectCurrentRadius = initialCentralObjectRadius;
+			sunViB = 1;
 			showLabels = true;
 			return;
 		}
@@ -415,12 +411,10 @@ function Star(){
 
 		cpac_Context.clearRect(0, 0, cpac.width, cpac.height);
 
-        // --- NEW: INTRO_REVEAL State Handling ---
 		if (animationState === 'INTRO_REVEAL') {
 			const elapsedIntroTime = performance.now() - introRevealStartTime;
 			let introProgress = Math.min(1, elapsedIntroTime / introRevealDuration);
 
-            // Use the scaled max radius for intro
 			const maxRadiusForIntro = Math.sqrt(cpac.width * cpac.width + cpac.height * cpac.height) / (isMobile ? 1.5 : 1.8);
 			introRevealCurrentRadius = maxRadiusForIntro * (1 - introProgress);
 
@@ -430,27 +424,24 @@ function Star(){
 				cpac_Context.fillStyle = 'black';
 				cpac_Context.fill();
 			} else {
-                introRevealCurrentRadius = 0; // Ensure it's exactly 0 if progress is 1
-            }
+                		introRevealCurrentRadius = 0;
+            		}
 
 			if (introProgress === 1) {
-				resetPlanets(); // Prepare planets and sun for the main scene
-				animationState = 'EXPLOSION'; // Transition to the original starting state
-				sunViB = 1; // Ensure explosion starts in the correct phase
-                // The main sun (centralObjectCurrentRadius) is set by resetPlanets,
-                // and drawExplosion will correctly calculate its expansion from collapsed state.
-                explosionParticles = []; // Clear particles to trigger re-init in drawExplosion
-                explosionStartTime = 0;  // Will be reset in drawExplosion when particles are empty
+				resetPlanets();
+				animationState = 'EXPLOSION';
+				sunViB = 1;
+                		explosionParticles = [];
+                		explosionStartTime = 0;
 			}
-		} else { // --- Original Animation States ---
+		} else {
 			cpac_Context.save();
 			cpac_Context.translate(centerX, centerY);
 			cpac_Context.scale(zoomFactor, zoomFactor);
 			cpac_Context.translate(-centerX, -centerY);
 
-			drawCentralObject(); // Draw pink sun / outro black hole
+			drawCentralObject();
 
-			// All other states as per your provided code
 			if (animationState === 'NORMAL_ORBIT') {
 				normalOrbit();
 			} else if (animationState === 'COLLAPSE_PLANETS') {
@@ -466,7 +457,6 @@ function Star(){
 					planet.size = Math.max(1, planet.size);
 					planet.angle += planet.speed;
 
-					// Adjusted click condition to use model-space radius
 					if (planet.radius >= centralObjectCurrentRadius + planet.size * 0.5) {
 						allPlanetsCollided = false;
 						drawPlanet(planet);
@@ -500,8 +490,8 @@ function Star(){
 					} else {
 						animationState = 'EXPLOSION';
 						sunViB = 1;
-                        explosionParticles = []; // Ensure fresh explosion
-                        explosionStartTime = 0;
+                        			explosionParticles = [];
+                        			explosionStartTime = 0;
 					}
 				}
 			} else if (animationState === 'EXPLOSION') {
@@ -511,13 +501,13 @@ function Star(){
 			} else if (animationState === 'RESET') {
 				resetPlanets();
 				animationState = 'EXPLOSION';
-                sunViB = 1; // Ensure fresh explosion
-                explosionParticles = [];
-                explosionStartTime = 0;
+                		sunViB = 1;
+                		explosionParticles = [];
+                		explosionStartTime = 0;
 			}
 
 			cpac_Context.restore();
-		} // End of else block (for non-INTRO_REVEAL states)
+		}
 
 		if (animationState === 'BLACK_SCREEN' && fadeAlpha > 0 && starSceneActive) {
 			cpac_Context.fillStyle = `rgba(0, 0, 0, ${fadeAlpha})`;
@@ -526,8 +516,5 @@ function Star(){
 
 		requestAnimationFrame(animate);
 	}
-
-	// Initial call to animate. No resetPlanets() or animationState = 'EXPLOSION' here,
-	// as INTRO_REVEAL is the new starting point.
 	animate();
 }
