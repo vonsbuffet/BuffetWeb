@@ -1,0 +1,484 @@
+@charset "utf-8";
+
+* {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    touch-action: manipulation;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+    background-color: rgb(0,0,0);
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    color: white;
+}
+
+.initial-abs-hidden {
+    opacity: 0;
+    position: absolute;
+}
+
+#Cpac, #Cpac2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+#Cpac2 {
+    z-index: 0;
+}
+
+#scrollable-container {
+    position: relative; /* z-index will work relative to this if Cpac is sibling */
+    z-index: 10; /* Ensure scrollable content is above Cpac */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    touch-action: none; 
+}
+
+#VBLogo {
+    width: auto;
+    /* height is set by JavaScript based on orientation (isLandscape) */
+    z-index: 6; 
+}
+
+#DarkMatter {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    z-index: 5;
+    pointer-events: none; 
+}
+
+.main-text-block {
+    position: absolute;
+    opacity: 0; 
+    transition: opacity 1s ease-in-out;
+    /* width, textAlign, top, left, transform are set dynamically by JS */
+}
+
+.service-content .service-title-container {
+    margin-bottom: 0.2em;
+}
+
+.service-content .service-title-text {
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    display: inline-block; /* Default, overridden below */
+    overflow-wrap: break-word; /* ADDED */
+}
+
+.service-content.vbc-service .service-title-text,
+.service-content.vps-service .service-title-text {
+    /* REVISED from 18vh and previous clamps */
+    font-size: clamp(2.2rem, 10vw, 8rem); 
+    line-height: 0.9;
+    text-decoration: none;
+    margin-bottom: 0.15em;
+    display: block;
+}
+
+.service-content.vbc-service .service-punchline,
+.service-content.vps-service .service-punchline {
+    /* REVISED from clamp(1.3rem, 3.5vw, 1.8rem) */
+    font-size: clamp(0.9rem, 2.2vw, 1.4rem); 
+    margin-bottom: 1.2em;
+    line-height: 1.4;
+    font-weight: normal;
+    overflow-wrap: break-word; /* ADDED */
+}
+
+.service-content .service-full-text {
+    overflow: hidden;
+    margin-top: 1em;
+    /* REVISED from no specific responsive font size */
+    font-size: clamp(0.75rem, 2vw, 1rem); 
+    line-height: 1.5; /* ADDED for better readability */
+    overflow-wrap: break-word; /* ADDED */
+}
+
+.action-buttons-container {
+    display: flex;
+    align-items: stretch; 
+    gap: 12px; 
+    /* margin-top is set by JS */
+    /* flex-direction and justify-content might be set by JS based on orientation */
+}
+
+.action-buttons-container > div {
+    width: 180px; 
+    height: 50px; 
+    padding: 14px 18px; 
+    /* REVISED from 1.15em */
+    font-size: clamp(0.9em, 1.8vw, 1.1em); 
+    border-radius: 8px; 
+    border: 1px solid rgba(100, 100, 100, 0.7); 
+    line-height: 1.3; 
+    color: white;
+    background-clip: padding-box; 
+    cursor: pointer;
+    box-sizing: border-box; 
+    white-space: nowrap;
+    text-align: center;
+    opacity: 0; 
+    margin: 0; 
+    transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.5s ease;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.action-buttons-container .vons-buffet-action-button { 
+    background-color: rgba(60, 60, 60, 0.9); 
+}
+
+.action-buttons-container .vons-buffet-action-button:hover {
+    background-color: rgba(70, 70, 70, 0.9);
+    border-color: rgba(120, 120, 120, 1);
+}
+
+.action-buttons-container .learn-more-button { 
+    background-color: rgba(75, 75, 115, 0.9); 
+    text-decoration: none; 
+}
+
+.action-buttons-container .learn-more-button:hover {
+    background-color: rgba(95, 95, 135, 0.9); 
+    text-decoration: underline;
+}
+
+.scroll-indicator-group {
+    position: absolute;
+    z-index: 10; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    cursor: default;
+    opacity: 0; 
+    transition: opacity 1s ease-in-out;
+}
+
+.arrow-shape {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    transition: border-color 0.3s ease-in-out; 
+}
+
+.arrow-shape.up {
+    border-bottom-width: 12px;
+    border-bottom-style: solid;
+}
+
+.arrow-shape.down {
+    border-top-width: 12px;
+    border-top-style: solid;
+}
+
+.indicator-label {
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    transition: color 0.3s ease-in-out; 
+}
+
+#indicator-vbc-arrow .indicator-label { 
+    margin-top: 8px;
+}
+
+#indicator-vps-arrow .indicator-label { 
+    order: -1; 
+    margin-bottom: 8px;
+}
+
+#contact-popup-vb {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #2c2c2c;
+    padding: 30px;
+    border: 1px solid #555;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    z-index: 10001; 
+    min-width: 300px; /* Base, overridden in media queries */
+    width: 80vw; /* Responsive width */
+    max-width: 500px; /* Max width */
+    text-align: left; 
+    box-sizing: border-box; /* ADDED */
+}
+
+#contact-popup-vb p {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: clamp(0.8em, 1.8vw, 0.9em); /* REVISED for responsiveness */
+    color: #ccc;
+    overflow-wrap: break-word; /* ADDED */
+}
+
+#contact-popup-vb #contact-email-vb {
+    font-weight: bold;
+    font-size: clamp(0.9em, 2vw, 1.1em); /* REVISED for responsiveness */
+    color: #aeffae; 
+    margin-right: 10px;
+    user-select: text; 
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    word-break: break-all; /* ADDED to prevent overflow if email is too long */
+}
+
+#contact-popup-vb button { 
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 1px solid #777;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: clamp(0.8em, 1.6vw, 0.9em); /* REVISED for responsiveness */
+}
+
+#contact-popup-vb button:hover {
+    background-color: #666;
+}
+
+#contact-popup-vb #close-popup-button-vb { 
+    display: block;
+    margin: 20px auto 0 auto; 
+    background-color: #444;
+}
+
+
+/* -------------------- MEDIA QUERIES -------------------- */
+
+/* Medium screens (Tablets) */
+@media (max-width: 768px) {
+    .service-content.vbc-service .service-title-text,
+    .service-content.vps-service .service-title-text {
+        font-size: clamp(2rem, 8vw, 7rem); 
+    }
+
+    .service-content.vbc-service .service-punchline,
+    .service-content.vps-service .service-punchline {
+        font-size: clamp(0.8rem, 2vw, 1.2rem);
+    }
+    
+    .service-content .service-full-text {
+        font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+    }
+
+    .action-buttons-container > div { /* Button text size for tablets */
+        font-size: clamp(0.85em, 1.7vw, 1em);
+    }
+    
+    /* JS controls main text block width and alignment for tablets based on orientation */
+    /* JS controls action-buttons-container flex-direction for tablets based on orientation */
+
+    #contact-popup-vb {
+        min-width: 280px;
+        width: 85vw;
+        padding: 25px;
+    }
+}
+
+/* Small screens (Mobile phones - typically portrait, but JS handles layout by width vs height) */
+@media (max-width: 480px) {
+    .service-content.vbc-service .service-title-text,
+    .service-content.vps-service .service-title-text {
+        font-size: clamp(1.6rem, 7vw, 4.5rem); /* Reduced from 8vw */
+        line-height: 1; 
+    }
+
+    .service-content.vbc-service .service-punchline,
+    .service-content.vps-service .service-punchline {
+        font-size: clamp(0.8rem, 2.5vw, 1.1rem); /* Reduced from 2.8vw */
+    }
+
+    .service-content .service-full-text {
+        font-size: clamp(0.75rem, 2.2vw, 0.9rem); 
+    }
+    
+    /* Button styling for when JS makes them stack (typically portrait) */
+    /* JS sets flex-direction: column and align-items: center for action-buttons-container in portrait */
+    .action-buttons-container > div {
+        font-size: clamp(0.8em, 2.2vw, 1em); 
+        width: 70vw; /* Example: if JS doesn't set width for portrait buttons */
+        max-width: 280px; /* Max width for stacked buttons */
+    }
+
+    /* JS controls main text block width and alignment for mobile based on orientation */
+
+    #contact-popup-vb {
+        min-width: auto;
+        width: 90vw;
+        padding: 20px;
+    }
+
+    #contact-popup-vb p {
+        font-size: clamp(0.75em, 2vw, 0.85em);
+    }
+
+    #contact-popup-vb #contact-email-vb {
+        font-size: clamp(0.85em, 2.2vw, 1em);
+    }
+    
+    #contact-popup-vb button {
+        font-size: clamp(0.75em, 1.8vw, 0.85em);
+        padding: 10px 12px; /* Slightly more tap area */
+    }
+
+    .scroll-indicator-group {
+        padding: 5px;
+    }
+    .arrow-shape {
+        border-left-width: 5px;
+        border-right-width: 5px;
+    }
+    .arrow-shape.up { border-bottom-width: 9px; }
+    .arrow-shape.down { border-top-width: 9px; }
+    .indicator-label { font-size: 10px; }
+    #indicator-vbc-arrow .indicator-label { margin-top: 5px; }
+    #indicator-vps-arrow .indicator-label { margin-bottom: 5px; }
+
+    /* MODIFICATION: Adjust min-height for slide content on small screens */
+    .slide-content-display {
+        min-height: 60px; /* Was 100px. Adjust this value as needed. */
+    }
+}
+
+/* ... (all your existing CSS) ... */
+
+/* Ensure the wrapper can be a positioning context for the absolute slideshow */
+.service-content-wrapper {
+    position: relative; /* THIS IS CRUCIAL */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    /* width is set by JS (e.g., 70vw desktop, 90vw mobile) */
+    /* textAlign is set by JS */
+    padding: 15px 0; 
+    box-sizing: border-box;
+}
+
+.slideshow-container {
+    /* display: flex; is set by JS when shown */
+    align-items: center;
+    justify-content: space-between; 
+    /* position: absolute; width: 100%; top, left are set by JS when shown */
+    box-sizing: border-box;
+    padding: 0 5px; 
+    position: relative; /* IMPORTANT: For absolute positioning of slide-indicators */
+    padding-bottom: 35px; /* Create space for the indicators at the bottom */
+                                /* Adjust this value based on dot size and desired spacing */
+}
+
+.slide-content-display {
+    flex-grow: 1;
+    text-align: left; 
+    padding: 10px 15px; 
+    overflow-wrap: break-word;
+    word-break: break-word;
+    min-height: 100px; 
+    border-radius: 5px;
+    
+    max-height: 300px; /* A fallback CSS max-height; JS will try to override this dynamically */
+    overflow-y: auto;
+    touch-action: pan-y; /* Allow vertical touch scrolling for this element */
+    overscroll-behavior-y: contain; /* Prevent scroll chaining to parent */
+    /* Optional styling (uncomment or modify if desired) */
+    /* border: 1px solid rgba(100, 100, 100, 0.3); */
+    /* background-color: rgba(40, 40, 40, 0.5); */
+}
+
+.slide-content-display p {
+    margin-top: 0;
+    margin-bottom: 0.8em;
+}
+.slide-content-display p:last-child {
+    margin-bottom: 0;
+}
+.slide-content-display ul {
+    padding-left: 20px;
+    margin-top: 0;
+    margin-bottom: 0.8em;
+}
+
+.slide-nav-arrow {
+    cursor: pointer;
+    padding: 8px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; 
+    align-self: center; 
+}
+
+.arrow-shape.horizontal {
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent; 
+    border-bottom: 7px solid transparent;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.arrow-shape.horizontal.left {
+    border-right-width: 12px; 
+    border-right-style: solid;
+    /* Color will be set by JS in animate() */
+}
+
+.arrow-shape.horizontal.right {
+    border-left-width: 12px; 
+    border-left-style: solid;
+    /* Color will be set by JS in animate() */
+}
+
+/* UPDATED: Slide Indicators Positioning and Size */
+.slide-indicators {
+    text-align: center;
+    position: absolute;     /* Position absolutely within slideshow-container */
+    bottom: 8px;            /* Adjust space from bottom of slideshow-container */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;            /* Allow width to be determined by content (dots) */
+    white-space: nowrap;  /* Prevent dots from wrapping if too many */
+}
+
+.slide-dot {
+    cursor: pointer;
+    height: 14px;     /* INCREASED size */
+    width: 14px;        /* INCREASED size */
+    margin: 0 8px;      /* Adjusted margin */
+    background-color: #555; 
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.slide-dot.active {
+    background-color: #bbb; 
+}
+
+.scroll-indicator-group,
+.indicator-arrow-group { /* This targets all relevant arrow containers */
+    opacity: 0; /* Ensures they are hidden by default */
+    transition: opacity 0.5s ease-in-out; /* Smooth transition for when JS shows them */
+}
