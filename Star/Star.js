@@ -231,7 +231,7 @@ function Star(){
  			{ name: "Github", url: "https://github.com/vonsbuffet?tab=repositories" },
  			{ name: "Email", url: "https://www.google.com/search?q=Earth+planet" },
  			{ name: "Universal Theory", url: "https://www.google.com/search?q=Does+A+Universal+Theory+Exist" },
- 			{ name: "Symmetric Encryption", url: "https://www.google.com/search?q=Is+aes+secure+against+quantum+computing" }
+ 			{ name: "Encryption", url: "https://www.google.com/search?q=Is+aes+secure+against+quantum+computing" }
  		];
  		numPlanets = planetData.length;
  		const minPlanetRadius = 100 * sizeScaleFactor;
