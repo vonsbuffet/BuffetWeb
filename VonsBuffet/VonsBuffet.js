@@ -270,7 +270,8 @@ function VonsBuffet() {
     const vbcFullDetails = `*-True universal theory transcends physics, and is applicable to any system. Without such universality, it would be an incomplete theory. 
 	<br/><br/>VBC'c is complete. Using a calculus based on computational logic instead of numbers, VBC'c has the property of being compatible with uncertainty.-*
 	*-Every layer of its technology is mathematically consistent with the theory (the OS framework, programming language, encryption algorithm, UI logic, etc.).<br/><br/>
-	The design requirement of mathematical consistency was a test to see if VBC'c applies to useful but potentially complex systems, as a means to minimize complexity. Notable technologies include: <ul><li><b>VBC'c :</b> Universal Theory / Opensource OS Framework / etc.</li><li><b>VBC DEKrypt :</b> Post-Quantum Symmetric Encryption</li><li><b>VB Currency :</b> A Revolutionary Cryptocurrency</li></ul> Each technology is a genuine breakthrough, with more unrevealed innovations integral to the platform.-*
+	The design requirement of mathematical consistency was a test to see if VBC'c applies to useful but potentially complex systems, as a means to minimize complexity.<br/><br/>
+ 	Notable technologies include: <ul><li><b>VBC'c :</b> Universal Theory / Opensource OS Framework / etc.</li><li><b>VBC DEKrypt :</b> Post-Quantum Symmetric Encryption</li><li><b>VB Currency :</b> A Revolutionary Cryptocurrency</li></ul> Each technology is a genuine breakthrough, with more unrevealed innovations integral to the platform.-*
 	*-Developed for Android, with cross-platform expansion imminent.</br></br>
 	The mobile platform is fully programmable, supporting both GPU and CPU with GPU enabled runtime programming.</br></br>
 	Our engineered input technology proves 2 thumbs can exceed the expression rate of all 10 of your thumbs on keyboard and mouse.</br></br>
