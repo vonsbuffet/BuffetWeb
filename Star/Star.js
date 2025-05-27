@@ -6,10 +6,10 @@ function Star(){
 	cpac2.height = window.innerHeight;
 	let cpac2_Context = cpac2.getContext('2d');
 	if (!cpac2_Context) {
-		alert("Background Canvas context not supported for Cpac2!");
+		displayMessageBox("Background Canvas context not supported for Cpac2!");
 		return;
 	}
-    	cpac2.style.display = 'block';
+ 	cpac2.style.display = 'block';
 
 
 	let cpac = document.getElementById('Cpac');
@@ -17,24 +17,24 @@ function Star(){
 	cpac.height = window.innerHeight;
 	let cpac_Context = cpac.getContext('2d');
 	if (!cpac_Context) {
-		alert("Canvas context not supported for Cpac!");
+		displayMessageBox("Canvas context not supported for Cpac!");
 		return;
 	}
 	cpac_Context.clearRect(0, 0, cpac.width, cpac.height);
 
-    	const isMobile = window.innerWidth < 768;
+ 	const isMobile = window.innerWidth < 768;
 
-    	const baseScreenDim = Math.min(window.innerWidth, window.innerHeight); // Use smaller dimension for scaling
-    	const sizeScaleFactor = isMobile ? (baseScreenDim / 600) : 1; // Scale down for mobile
-    	const speedScaleFactor = isMobile ? 0.7 : 1; // Adjust speeds for mobile (e.g., slower)
+ 	const baseScreenDim = Math.min(window.innerWidth, window.innerHeight);
+ 	const sizeScaleFactor = isMobile ? (baseScreenDim / 600) : 1;
+ 	const speedScaleFactor = isMobile ? 0.7 : 1;
 
 	function getRandomNumber(min, max) { return Math.random() * (max - min) + min; }
 
 	function drawStaticBackground(ctx) {
 		ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        	const numStars = isMobile ? 100 : 200;
-        	const minStarRadius = isMobile ? 0.5 : 1;
-        	const maxStarRadius = isMobile ? 2 : 4;
+ 		const numStars = isMobile ? 100 : 200;
+ 		const minStarRadius = isMobile ? 0.5 : 1;
+ 		const maxStarRadius = isMobile ? 2 : 4;
 
 		for (var i = 0; i < numStars; i++) {
 			var x = getRandomNumber(0, ctx.canvas.width);
@@ -96,6 +96,30 @@ function Star(){
 
 	let starSceneActive = true;
 
+	function displayMessageBox(message) {
+		const messageBox = document.createElement('div');
+		messageBox.style.position = 'fixed';
+		messageBox.style.top = '50%';
+		messageBox.style.left = '50%';
+		messageBox.style.transform = 'translate(-50%, -50%)';
+		messageBox.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+		messageBox.style.color = 'white';
+		messageBox.style.padding = '20px';
+		messageBox.style.borderRadius = '10px';
+		messageBox.style.zIndex = '10000';
+		messageBox.style.fontFamily = 'sans-serif';
+		messageBox.style.fontSize = '18px';
+		messageBox.style.textAlign = 'center';
+		messageBox.textContent = message;
+
+		document.body.appendChild(messageBox);
+
+		setTimeout(() => {
+			document.body.removeChild(messageBox);
+		}, 3000);
+	}
+
+
 	function handleCanvasClick(event) {
 		if (!starSceneActive) return;
 
@@ -108,7 +132,7 @@ function Star(){
 			if (distanceCentral < (centralObjectCurrentRadius * zoomFactor) * (isMobile ? 1.5 : 1)) {
 				nextScene = 1;
 				animationState = 'COLLAPSE_PLANETS';
-                		return;
+ 				return;
 			}
 
 			for (let planet of planets) {
@@ -119,24 +143,25 @@ function Star(){
 				
 				if (distancePlanet < clickableRadius) {
 							if (planet.name == 'Email'){
-								const emailToCopy = "Von@VonsBuffet.ca"; 
-								const alertMessage = emailToCopy + " has been copied to your clipboard. Email us ..."; 
-								if (navigator.clipboard && navigator.clipboard.writeText) { 
-									navigator.clipboard.writeText(emailToCopy) 
-										.then(() => { alert(alertMessage); }) 
-										.catch(err => { 
-											console.error('Failed to copy email to clipboard: ', err); 
-											alert('Failed to copy email automatically. Please copy it manually: ' + emailToCopy); 
-										}); 
-								} else { 
-									console.warn('Clipboard API not available. User advised to copy manually.'); 
-									alert('To copy the email, please select and copy it manually: ' + emailToCopy); 
+								const emailToCopy = "Von@VonsBuffet.ca";	
+								const alertMessage = emailToCopy + " has been copied to your clipboard. Email us ...";	
+								const tempInput = document.createElement('textarea');
+								tempInput.value = emailToCopy;
+								document.body.appendChild(tempInput);
+								tempInput.select();
+								try {
+									document.execCommand('copy');
+									displayMessageBox(alertMessage);
+								} catch (err) {
+									console.error('Failed to copy email to clipboard: ', err);	
+									displayMessageBox('Failed to copy email automatically. Please copy it manually: ' + emailToCopy);	
 								}
+								document.body.removeChild(tempInput);
 							}
-				    else if (planet.url) {
+ 				else if (planet.url) {
 					window.open(planet.url, '_blank');
-				    }
-				    return;
+ 				}
+ 				return;
 				}
 			}
 		}
@@ -167,7 +192,7 @@ function Star(){
 				zoomFactor = blackHoleFullZoomFactor;
 				currentBlackHoleRadius = targetBlackHoleModelRadiusEnd;
 				animationState = 'BLACK_SCREEN';
-                fadeAlpha = 1;
+ 				fadeAlpha = 1;
 			}
 		} else if (animationState === 'BLACK_SCREEN') {
 			fadeAlpha = Math.max(0, fadeAlpha - fadeSpeed);
@@ -201,24 +226,24 @@ function Star(){
 	let numPlanets;
 	function resetPlanets() {
 		planets = [];
-	        const planetData = [
-	            { name: "Youtube", url: "https://www.youtube.com/@VonsBuffet" },
-	            { name: "Github", url: "https://github.com/vonsbuffet?tab=repositories" },
-	            { name: "Email", url: "https://www.google.com/search?q=Earth+planet" },
-	            { name: "Universal Theory", url: "https://www.google.com/search?q=Does+A+Universal+Theory+Exist" },
-	            { name: "Symmetric Encryption", url: "https://www.google.com/search?q=Is+aes+secure+against+quantum+computing" }
-	        ];
-	        numPlanets = planetData.length;
-	        const minPlanetRadius = 100 * sizeScaleFactor;
-	        const maxPlanetRadius = Math.min(window.innerWidth, window.innerHeight) / 2 - 30 * sizeScaleFactor;
-	        const minPlanetSize = 20 * sizeScaleFactor;
-	        const maxPlanetSize = 30 * sizeScaleFactor;
+ 		const planetData = [
+ 			{ name: "Youtube", url: "https://www.youtube.com/@VonsBuffet" },
+ 			{ name: "Github", url: "https://github.com/vonsbuffet?tab=repositories" },
+ 			{ name: "Email", url: "https://www.google.com/search?q=Earth+planet" },
+ 			{ name: "Universal Theory", url: "https://www.google.com/search?q=Does+A+Universal+Theory+Exist" },
+ 			{ name: "Symmetric Encryption", url: "https://www.google.com/search?q=Is+aes+secure+against+quantum+computing" }
+ 		];
+ 		numPlanets = planetData.length;
+ 		const minPlanetRadius = 100 * sizeScaleFactor;
+ 		const maxPlanetRadius = Math.min(window.innerWidth, window.innerHeight) / 2 - 30 * sizeScaleFactor;
+ 		const minPlanetSize = 20 * sizeScaleFactor;
+ 		const maxPlanetSize = 30 * sizeScaleFactor;
 
 
 		for (let i = 0; i < numPlanets; i++) {
 			planets.push({
 				name: planetData[i].name,
-                		url: planetData[i].url,
+ 				url: planetData[i].url,
 				angle: Math.random() * Math.PI * 2,
 				radius: getRandomNumber(minPlanetRadius, maxPlanetRadius),
 				size: getRandomNumber(minPlanetSize, maxPlanetSize),
@@ -270,8 +295,8 @@ function Star(){
 	}
 
 	function drawCentralObjectLabel(name, context) {
-		context.fontSize = isMobile ? '16px' : '24px';
-		context.fontFamily = "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace";
+		// Corrected: Combine font size and family into a single 'font' property
+		context.font = `${isMobile ? '16px' : '24px'} 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace`;
 		context.fillStyle = 'white';
 		context.textAlign = 'center';
 		context.textBaseline = 'bottom';
@@ -301,8 +326,7 @@ function Star(){
 	}
 
 	function drawPlanetLabel(planet, context) {
-		context.font = isMobile ? '14px Arial' : '21px Arial';
-		context.fontFamily = "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace";
+		context.font = `${isMobile ? '14px' : '21px'} 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace`;
 		context.fillStyle = 'grey';
 		context.textAlign = 'center';
 		context.textBaseline = 'bottom';
@@ -361,7 +385,7 @@ function Star(){
 		if (explosionProgress >= 1) {
 			animationState = 'NORMAL_ORBIT';
 			explosionParticles = [];
-            		centralObjectCurrentRadius = initialCentralObjectRadius;
+ 			centralObjectCurrentRadius = initialCentralObjectRadius;
 			sunViB = 1;
 			showLabels = true;
 			return;
@@ -404,15 +428,15 @@ function Star(){
 				cpac_Context.fillStyle = 'black';
 				cpac_Context.fill();
 			} else {
-                		introRevealCurrentRadius = 0;
-            		}
+ 				introRevealCurrentRadius = 0;
+ 			}
 
 			if (introProgress === 1) {
 				resetPlanets();
 				animationState = 'EXPLOSION';
 				sunViB = 1;
-                		explosionParticles = [];
-                		explosionStartTime = 0;
+ 				explosionParticles = [];
+ 				explosionStartTime = 0;
 			}
 		} else {
 			cpac_Context.save();
@@ -470,8 +494,8 @@ function Star(){
 					} else {
 						animationState = 'EXPLOSION';
 						sunViB = 1;
-                        			explosionParticles = [];
-                        			explosionStartTime = 0;
+ 						explosionParticles = [];
+ 						explosionStartTime = 0;
 					}
 				}
 			} else if (animationState === 'EXPLOSION') {
@@ -481,9 +505,9 @@ function Star(){
 			} else if (animationState === 'RESET') {
 				resetPlanets();
 				animationState = 'EXPLOSION';
-                		sunViB = 1;
-                		explosionParticles = [];
-                		explosionStartTime = 0;
+ 				sunViB = 1;
+ 				explosionParticles = [];
+ 				explosionStartTime = 0;
 			}
 
 			cpac_Context.restore();
