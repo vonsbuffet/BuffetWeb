@@ -1,47 +1,40 @@
 function Star(){
-	deactivateVonsBuffetVisuals(); // Correctly called at the start of Star scene
+	deactivateVonsBuffetVisuals();
 
-	let cpac2 = document.getElementById('Cpac2'); // Use let or const for block-scoped variables
+	let cpac2 = document.getElementById('Cpac2');
 	cpac2.width = window.innerWidth;
 	cpac2.height = window.innerHeight;
 	let cpac2_Context = cpac2.getContext('2d');
 	if (!cpac2_Context) {
-		alert("Background Canvas context not supported for Cpac2!"); // More specific alert
+		alert("Background Canvas context not supported for Cpac2!");
 		return;
 	}
-	// Ensure Cpac2 is visible when Star starts
-    cpac2.style.display = 'block';
+    	cpac2.style.display = 'block';
 
 
-	let cpac = document.getElementById('Cpac'); // Use let or const
+	let cpac = document.getElementById('Cpac');
 	cpac.width = window.innerWidth;
 	cpac.height = window.innerHeight;
 	let cpac_Context = cpac.getContext('2d');
 	if (!cpac_Context) {
-		alert("Canvas context not supported for Cpac!"); // More specific alert
+		alert("Canvas context not supported for Cpac!");
 		return;
 	}
 	cpac_Context.clearRect(0, 0, cpac.width, cpac.height);
 
-	// Determine if it's a mobile device (for general scaling adjustments)
-    const isMobile = window.innerWidth < 768; // Common breakpoint for mobile
-    // Or you could use: /Mobi|Android/i.test(navigator.userAgent);
-    // Let's use width for now for consistent visual scaling across small screens
+    	const isMobile = window.innerWidth < 768;
 
-    // Responsive Scaling Factors
-    const baseScreenDim = Math.min(window.innerWidth, window.innerHeight); // Use smaller dimension for scaling
-    const sizeScaleFactor = isMobile ? (baseScreenDim / 600) : 1; // Scale down for mobile
-    const speedScaleFactor = isMobile ? 0.7 : 1; // Adjust speeds for mobile (e.g., slower)
+    	const baseScreenDim = Math.min(window.innerWidth, window.innerHeight); // Use smaller dimension for scaling
+    	const sizeScaleFactor = isMobile ? (baseScreenDim / 600) : 1; // Scale down for mobile
+    	const speedScaleFactor = isMobile ? 0.7 : 1; // Adjust speeds for mobile (e.g., slower)
 
-	// Helper function
 	function getRandomNumber(min, max) { return Math.random() * (max - min) + min; }
 
 	function drawStaticBackground(ctx) {
 		ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        // Reduce number of stars and their size for mobile
-        const numStars = isMobile ? 100 : 200;
-        const minStarRadius = isMobile ? 0.5 : 1;
-        const maxStarRadius = isMobile ? 2 : 4;
+        	const numStars = isMobile ? 100 : 200;
+        	const minStarRadius = isMobile ? 0.5 : 1;
+        	const maxStarRadius = isMobile ? 2 : 4;
 
 		for (var i = 0; i < numStars; i++) {
 			var x = getRandomNumber(0, ctx.canvas.width);
@@ -56,23 +49,19 @@ function Star(){
 			ctx.fill();
 		}
 	}
-	drawStaticBackground(cpac2_Context); // Draw starfield on Cpac2 immediately
+	drawStaticBackground(cpac2_Context);
 
 	const centerX = cpac.width / 2;
 	const centerY = cpac.height / 2;
-	const initialCentralObjectRadius = 50 * sizeScaleFactor; // Scaled
-	const collapsedCentralObjectRadius = 10 * sizeScaleFactor; // Scaled
-	let centralObjectCurrentRadius = collapsedCentralObjectRadius; // Initial value, will be managed by states
+	const initialCentralObjectRadius = 50 * sizeScaleFactor;
+	const collapsedCentralObjectRadius = 10 * sizeScaleFactor;
+	let centralObjectCurrentRadius = collapsedCentralObjectRadius;
 	const centralObjectName = "Von's Buffet";
 
-    // --- NEW: Intro Reveal Animation Variables ---
-	const introRevealDuration = 1500; // Duration in ms
+	const introRevealDuration = 1500;
 	let introRevealStartTime = performance.now();
-    // Scale intro reveal radius appropriately
-	let introRevealCurrentRadius = Math.sqrt(cpac.width * cpac.width + cpac.height * cpac.height) / (isMobile ? 1.5 : 1.8); // Adjusted for mobile
-    // --- END NEW ---
+	let introRevealCurrentRadius = Math.sqrt(cpac.width * cpac.width + cpac.height * cpac.height) / (isMobile ? 1.5 : 1.8);
 
-	// Initial animation state changed to INTRO_REVEAL
 	let animationState = 'INTRO_REVEAL';
 	let nextScene = 0;
 	let orbitTimer = 0;
@@ -80,30 +69,30 @@ function Star(){
 	let collapseSpeedFactor = 1.0;
 	let collisionSpeedFactor = 1.0;
 	let explosionParticles = [];
-	const explosionParticleCount = isMobile ? 30 : 50; // Fewer particles for mobile
+	const explosionParticleCount = isMobile ? 30 : 50;
 	let explosionStartTime = 0;
 	const explosionDuration = 1000;
 	let sunCollapseStartTime = 0;
 	const sunCollapseDuration = 1000;
-	let sunViB = 1; // Will be explicitly set before EXPLOSION starts
+	let sunViB = 1;
 	let explosionSunRadius;
 	let explosionSunAlpha;
 	let showLabels = false;
 
-	let zoomFactor = 1; // For outro zoom
-	let blackHoleVisible = false; // For outro zoom
-	let zoomStartTime; // For outro zoom
-	const zoomDurationSun = 1000; // For outro zoom
-	const zoomDurationBlackHole = 1000; // For outro zoom
-	let zoomStage = ''; // For outro zoom
-	let fadeAlpha = 1; // For outro zoom black screen fade
-	const fadeSpeed = 0.04; // For outro zoom
-	const blackHoleRevealZoomFactor = isMobile ? 250 : 500; // Scaled for mobile
-	const blackHoleFullZoomFactor = isMobile ? 100 : 200; // Scaled for mobile
-	let currentBlackHoleRadius = 0; // For outro zoom
-	const initialApparentBlackHolePixelRadius = 0.5 * sizeScaleFactor; // Scaled
-	let targetBlackHoleModelRadiusStart; // For outro zoom
-	let targetBlackHoleModelRadiusEnd; // For outro zoom
+	let zoomFactor = 1;
+	let blackHoleVisible = false;
+	let zoomStartTime;
+	const zoomDurationSun = 1000;
+	const zoomDurationBlackHole = 1000;
+	let zoomStage = '';
+	let fadeAlpha = 1;
+	const fadeSpeed = 0.04;
+	const blackHoleRevealZoomFactor = isMobile ? 250 : 500;
+	const blackHoleFullZoomFactor = isMobile ? 100 : 200;
+	let currentBlackHoleRadius = 0;
+	const initialApparentBlackHolePixelRadius = 0.5 * sizeScaleFactor;
+	let targetBlackHoleModelRadiusStart;
+	let targetBlackHoleModelRadiusEnd;
 
 	let starSceneActive = true;
 
@@ -116,50 +105,45 @@ function Star(){
 
 		if (animationState === 'NORMAL_ORBIT' && showLabels) {
 			const distanceCentral = Math.sqrt((clickX - centerX) ** 2 + (clickY - centerY) ** 2);
-			// Adjust click radius for central object based on its current size and zoom
-			if (distanceCentral < (centralObjectCurrentRadius * zoomFactor) * (isMobile ? 1.5 : 1)) { // Make clickable area larger on mobile
+			if (distanceCentral < (centralObjectCurrentRadius * zoomFactor) * (isMobile ? 1.5 : 1)) {
 				nextScene = 1;
 				animationState = 'COLLAPSE_PLANETS';
-                return; // Consume click if central object is clicked
+                		return;
 			}
 
-            // --- New: Check for planet clicks ---
-            for (let planet of planets) {
-                const planetX = centerX + (planet.radius * Math.cos(planet.angle)) * zoomFactor;
-                const planetY = centerY + (planet.radius * Math.sin(planet.angle)) * zoomFactor;
-                const distancePlanet = Math.sqrt((clickX - planetX) ** 2 + (clickY - planetY) ** 2);
-
-                // Make clickable area larger for planets on mobile, and account for zoom
-                const clickableRadius = (planet.size * (isMobile ? 1.8 : 1.2)) * zoomFactor;
-
-                if (distancePlanet < clickableRadius) {
-					if (planet.name == 'Email'){
-						const emailToCopy = "Von@VonsBuffet.ca"; 
-						const alertMessage = emailToCopy + " has been copied to your clipboard. Email us ..."; 
-						if (navigator.clipboard && navigator.clipboard.writeText) { 
-							navigator.clipboard.writeText(emailToCopy) 
-								.then(() => { alert(alertMessage); }) 
-								.catch(err => { 
-									console.error('Failed to copy email to clipboard: ', err); 
-									alert('Failed to copy email automatically. Please copy it manually: ' + emailToCopy); 
-								}); 
-						} else { 
-							console.warn('Clipboard API not available. User advised to copy manually.'); 
-							alert('To copy the email, please select and copy it manually: ' + emailToCopy); 
-						}
-					}
-                    else if (planet.url) { // Check if the planet has a URL assigned
-                        window.open(planet.url, '_blank'); // Open the link in a new tab
-                    }
-                    return; // Consume click if a planet is clicked
-                }
-            }
-            // --- End New ---
+			for (let planet of planets) {
+				const planetX = centerX + (planet.radius * Math.cos(planet.angle)) * zoomFactor;
+				const planetY = centerY + (planet.radius * Math.sin(planet.angle)) * zoomFactor;
+				const distancePlanet = Math.sqrt((clickX - planetX) ** 2 + (clickY - planetY) ** 2);
+				const clickableRadius = (planet.size * (isMobile ? 1.8 : 1.2)) * zoomFactor;
+				
+				if (distancePlanet < clickableRadius) {
+							if (planet.name == 'Email'){
+								const emailToCopy = "Von@VonsBuffet.ca"; 
+								const alertMessage = emailToCopy + " has been copied to your clipboard. Email us ..."; 
+								if (navigator.clipboard && navigator.clipboard.writeText) { 
+									navigator.clipboard.writeText(emailToCopy) 
+										.then(() => { alert(alertMessage); }) 
+										.catch(err => { 
+											console.error('Failed to copy email to clipboard: ', err); 
+											alert('Failed to copy email automatically. Please copy it manually: ' + emailToCopy); 
+										}); 
+								} else { 
+									console.warn('Clipboard API not available. User advised to copy manually.'); 
+									alert('To copy the email, please select and copy it manually: ' + emailToCopy); 
+								}
+							}
+				    else if (planet.url) {
+					window.open(planet.url, '_blank');
+				    }
+				    return;
+				}
+			}
 		}
 	}
 	cpac.addEventListener('click', handleCanvasClick);
 
-	function updateZoom() { // This function is for the OUTRO zoom to VonsBuffet
+	function updateZoom() {
 		if (!starSceneActive) return;
 		const elapsedZoomTime = performance.now() - zoomStartTime;
 		let zoomProgress = Math.min(1, elapsedZoomTime / (zoomStage === 'SUN' ? zoomDurationSun : zoomDurationBlackHole));
@@ -214,36 +198,32 @@ function Star(){
 	}
 
 	let planets = [];
-	let numPlanets; // Fewer planets for mobile
-	function resetPlanets() { // As per your provided code
+	let numPlanets;
+	function resetPlanets() {
 		planets = [];
-        // --- New: Add URLs to planet data ---
-        const planetData = [
-            { name: "Youtube", url: "https://www.youtube.com/@VonsBuffet" },
-            { name: "Github", url: "https://github.com/vonsbuffet?tab=repositories" },
-            { name: "Email", url: "https://www.google.com/search?q=Earth+planet" },
-            { name: "Universal Theory", url: "https://www.google.com/search?q=Does+A+Universal+Theory+Exist" },
-            { name: "Symmetric Encryption", url: "https://www.google.com/search?q=Is+aes+secure+against+quantum+computing" }
-        ];
-        numPlanets = planetData.length;
-        // --- End New ---
-
-        // Initial planet radius range and size based on scaling factor
-        const minPlanetRadius = 100 * sizeScaleFactor;
-        const maxPlanetRadius = Math.min(window.innerWidth, window.innerHeight) / 2 - 30 * sizeScaleFactor;
-        const minPlanetSize = 20 * sizeScaleFactor;
-        const maxPlanetSize = 30 * sizeScaleFactor;
+	        const planetData = [
+	            { name: "Youtube", url: "https://www.youtube.com/@VonsBuffet" },
+	            { name: "Github", url: "https://github.com/vonsbuffet?tab=repositories" },
+	            { name: "Email", url: "https://www.google.com/search?q=Earth+planet" },
+	            { name: "Universal Theory", url: "https://www.google.com/search?q=Does+A+Universal+Theory+Exist" },
+	            { name: "Symmetric Encryption", url: "https://www.google.com/search?q=Is+aes+secure+against+quantum+computing" }
+	        ];
+	        numPlanets = planetData.length;
+	        const minPlanetRadius = 100 * sizeScaleFactor;
+	        const maxPlanetRadius = Math.min(window.innerWidth, window.innerHeight) / 2 - 30 * sizeScaleFactor;
+	        const minPlanetSize = 20 * sizeScaleFactor;
+	        const maxPlanetSize = 30 * sizeScaleFactor;
 
 
 		for (let i = 0; i < numPlanets; i++) {
 			planets.push({
-				name: planetData[i].name, // Use name from planetData
-                url: planetData[i].url,   // Assign the URL here
+				name: planetData[i].name,
+                		url: planetData[i].url,
 				angle: Math.random() * Math.PI * 2,
-				radius: getRandomNumber(minPlanetRadius, maxPlanetRadius), // Scaled
-				size: getRandomNumber(minPlanetSize, maxPlanetSize), // Scaled
+				radius: getRandomNumber(minPlanetRadius, maxPlanetRadius),
+				size: getRandomNumber(minPlanetSize, maxPlanetSize),
 				color: `hsl(${Math.random() * 360}, 80%, 60%)`,
-				speed: (Math.random() * 0.001 + 0.001) * speedScaleFactor, // Scaled speed
+				speed: (Math.random() * 0.001 + 0.001) * speedScaleFactor,
 				collapseSpeed: 0,
 				initialRadius: 0
 			});
@@ -256,7 +236,7 @@ function Star(){
 		showLabels = false;
 	}
 
-	function normalOrbit(){ // As per your provided code
+	function normalOrbit(){
 		orbitTimer += 16;
 		const normalOrbitProgress = orbitTimer / normalOrbitDuration;
 
@@ -276,12 +256,12 @@ function Star(){
 		}
 	}
 
-	function drawCentralObject() { // As per your provided code
+	function drawCentralObject() {
 		cpac_Context.beginPath();
 		cpac_Context.arc(centerX, centerY, centralObjectCurrentRadius, 0, Math.PI * 2);
 		cpac_Context.fillStyle = 'pink';
 		cpac_Context.fill();
-		if (blackHoleVisible) { // For outro
+		if (blackHoleVisible) {
 			cpac_Context.beginPath();
 			cpac_Context.arc(centerX, centerY, currentBlackHoleRadius, 0, Math.PI * 2);
 			cpac_Context.fillStyle = 'black';
@@ -290,7 +270,7 @@ function Star(){
 	}
 
 	function drawCentralObjectLabel(name, context) {
-		context.font = isMobile ? '16px Arial' : '24px Arial';
+		context.fontSize = isMobile ? '16px' : '24px';
 		context.fontFamily = "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace";
 		context.fillStyle = 'white';
 		context.textAlign = 'center';
