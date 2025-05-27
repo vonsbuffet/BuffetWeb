@@ -1,25 +1,33 @@
 function Star(){
 	deactivateVonsBuffetVisuals();
 
+	const dpr = window.devicePixelRatio || 1;
+
 	let cpac2 = document.getElementById('Cpac2');
-	cpac2.width = window.innerWidth;
-	cpac2.height = window.innerHeight;
+	cpac2.width = window.innerWidth * dpr;
+	cpac2.height = window.innerHeight * dpr;
+	cpac2.style.width = window.innerWidth + 'px';
+	cpac2.style.height = window.innerHeight + 'px';
 	let cpac2_Context = cpac2.getContext('2d');
 	if (!cpac2_Context) {
 		displayMessageBox("Background Canvas context not supported for Cpac2!");
 		return;
 	}
- 	cpac2.style.display = 'block';
+    	cpac2_Context.scale(dpr, dpr);
+ 	cpac2.style.display = 'block';
 
 
 	let cpac = document.getElementById('Cpac');
-	cpac.width = window.innerWidth;
-	cpac.height = window.innerHeight;
+	cpac.width = window.innerWidth * dpr;
+	cpac.height = window.innerHeight * dpr;
+	cpac.style.width = window.innerWidth + 'px';
+	cpac.style.height = window.innerHeight + 'px';
 	let cpac_Context = cpac.getContext('2d');
 	if (!cpac_Context) {
 		displayMessageBox("Canvas context not supported for Cpac!");
 		return;
 	}
+    	cpac_Context.scale(dpr, dpr);
 	cpac_Context.clearRect(0, 0, cpac.width, cpac.height);
 
  	const isMobile = window.innerWidth < 768;
