@@ -143,7 +143,8 @@ function VonsBuffet() {
     } 
 
     function updateSimplifiedNoiseEffect() { 
-        if ((typeof active_VonsBuffet !== 'undefined' && !active_VonsBuffet) && !blackHoleAnimation.isActive) return; 
+        if ((typeof active_VonsBuffet !== 'undefined' && !active_VonsBuffet) && !blackHoleAnimation.isActive)
+		return; 
         const currentTime = Date.now(); 
         noisyTextBlocksData.forEach(blockData => { 
             if (currentTime - blockData.lastNoiseCycleTime > NOISE_CYCLE_INTERVAL_T) { 
@@ -444,7 +445,7 @@ function VonsBuffet() {
 
                 learnMoreButton.textContent = 'Show less...'; 
                 currentSlideIndex = 0; 
-                updateSlideView(); 
+                updateSlideView();
             } else { 
                 slideshowContainer.style.display = 'none'; 
                 learnMoreButton.textContent = 'Learn more...'; 
@@ -481,13 +482,15 @@ function VonsBuffet() {
     if (belowLogoTextDiv1) setupLearnMore(belowLogoTextDiv1); 
 
     noisyTextBlocksData = []; 
-    if (aboveLogoTextDiv) { 
-        const wrapperVBC = aboveLogoTextDiv.querySelector('.service-content-wrapper'); 
-        if(wrapperVBC) initializeNoiseForBlock(wrapperVBC); 
+    if (aboveLogoTextDiv) {
+    	initializeNoiseForBlock(aboveLogoTextDiv);
+        //const wrapperVBC = aboveLogoTextDiv.querySelector('.service-content-wrapper'); 
+        //if(wrapperVBC) initializeNoiseForBlock(wrapperVBC); 
     } 
     if (belowLogoTextDiv1) { 
-        const wrapperVPS = belowLogoTextDiv1.querySelector('.service-content-wrapper'); 
-        if(wrapperVPS) initializeNoiseForBlock(wrapperVPS); 
+        initializeNoiseForBlock(belowLogoTextDiv1);
+    	//const wrapperVPS = belowLogoTextDiv1.querySelector('.service-content-wrapper'); 
+        //if(wrapperVPS) initializeNoiseForBlock(wrapperVPS); 
     } 
 
     const monospaceFont = "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace"; 
