@@ -294,7 +294,7 @@ function VonsBuffet() {
 	*-Currently operating in Calgary, Alberta, Canada, we're established as the definitive solution for high-volume operations where conventional infrastructure fails and time is critical.<br/><br/>
 	We routinely move assets valued over $800,000.<br/>
 	At what cost you ask?<br/>
-	<span style='color:grey'>B</span><span style='color:purple'>V</span> = <span style='color:green'>$200</span>/hour (in hourly increments) + Any Additional equipment/material costs (e.g. truck, boxes, tape, etc.).-*
+	<span style='color:grey'>B</span><span style='color:purple'>V</span> = <span style='color:green'>$200</span>/hour + Any Additional equipment/material costs (e.g. truck, boxes, tape, etc.).-*
 	*-Your existing equipment and materials can be seamlessly integrated, thereby waiving additional costs. Otherwise, these additional costs will be presented as a bill of materials, strictly covering the direct expenses.<br/><br/>
 	Von's Buffet does not profit from additional expenses; this commitment encourages us to 'lower', and eventually 'remove', all such external costs.<br/><br/>
 	Now the <span style='color:green'>$200</span>/hour... How does paying premium rates for a moving service benefit you? Funds from industrial and residential asset relocation directly fuels our core research. Your investment propels our mission to architect future-proof information protection, envisioning services for natural or synthesized disaster scenarios, ensuring every intelligence remains connected.-*
