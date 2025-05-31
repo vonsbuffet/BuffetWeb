@@ -297,7 +297,8 @@ function VonsBuffet() {
 	<span style='color:grey'>B</span><span style='color:purple'>V</span> = <span style='color:green'>$200</span>/hour + Any Additional equipment/material costs (e.g. truck, boxes, tape, etc.).-*
 	*-Your existing equipment and materials can be seamlessly integrated, thereby waiving additional costs. Otherwise, these additional costs will be presented as a bill of materials, strictly covering the direct expenses.<br/><br/>
 	Von's Buffet does not profit from additional expenses; this commitment encourages us to 'lower', and eventually 'remove', all such external costs.<br/><br/>
-	Now the <span style='color:green'>$200</span>/hour... How does paying premium rates for a moving service benefit you? Funds from industrial and residential asset relocation directly fuels our core research. Your investment propels our mission to architect future-proof information protection, envisioning services for natural or synthesized disaster scenarios, ensuring every intelligence remains connected.-*
+	Now the <span style='color:green'>$200</span>/hour... How does paying premium rates for a moving service benefit you?<br/><br/>
+ 	Funds from industrial and residential asset relocation directly fuels our core research. Your investment propels our mission to architect future-proof information protection, envisioning services for natural or synthesized disaster scenarios, ensuring every intelligence remains connected.-*
 	*-Also, we're simply that fast!<br/><br/>Contact Von today to prepare an order.-*`.replace(/[\n\t\r\f\v\u00A0\u2000-\u200B\u2028\u2029\uFEFF\u0000]/g, '');
 
     const vbcButtonId = 'vbc-action-button-vb'; 
