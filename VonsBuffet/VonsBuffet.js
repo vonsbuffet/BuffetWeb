@@ -782,63 +782,73 @@ function VonsBuffet() {
         return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }; 
     } 
 
-    function updateDarkMatter() { 
-        if (((typeof active_VonsBuffet !== 'undefined' && !active_VonsBuffet) && !blackHoleAnimation.isActive) || !darkMatter || !darkMatter_Context || !logo) return; 
+    function updateDarkMatter() {
+	if (((typeof active_VonsBuffet !== 'undefined' && !active_VonsBuffet) && !blackHoleAnimation.isActive) || !darkMatter || !darkMatter_Context || !logo || !scrollableContainer) {
+		return;
+	}
 
-        const logoScreenCenter = actualGetLogoScreenCenter(); 
-        const dmStyleLeft = logoScreenCenter.x - darkMatter.width / 2; 
-        const dmStyleTop = (logoScreenCenter.y - darkMatter.height / 2) - sectionPositions[currentSection];
-        darkMatter.style.left = `${dmStyleLeft}px`; 
-        darkMatter.style.top = `${dmStyleTop}px`; 
-        darkMatter_Context.clearRect(0, 0, darkMatter.width, darkMatter.height); 
+	const scrollableContainerRect = scrollableContainer.getBoundingClientRect();
+	
+	const logoRect = logo.getBoundingClientRect();
+	const logoScreenCenterX = logoRect.left + logoRect.width / 2;
+	const logoScreenCenterY = logoRect.top + logoRect.height / 2;
+	const logoCenterInContainerX = logoScreenCenterX - scrollableContainerRect.left;
+	const logoCenterInContainerY = logoScreenCenterY - scrollableContainerRect.top;
 
-        const targetXForParticles = darkMatter.width / 2; 
-        const targetYForParticles = darkMatter.height / 2; 
-        const currentParticleSpeed = window.innerHeight > window.innerWidth ? 15 : 20; 
-        const removalThreshold = Math.min(logo.offsetWidth, logo.offsetHeight) / 2; 
-        const currentMinParticleSize = 1; 
-        const currentMaxParticleSize = window.innerHeight > window.innerWidth ? 2 : 4; 
+	const dmStyleLeft = logoCenterInContainerX - darkMatter.width / 2;
+	const dmStyleTop = logoCenterInContainerY - darkMatter.height / 2;
 
-        for (let i = particles.length - 1; i >= 0; i--) { 
-            const particle = particles[i]; 
-            const dx = targetXForParticles - particle.x; 
-            const dy = targetYForParticles - particle.y; 
-            const distance = Math.sqrt(dx * dx + dy * dy); 
+	darkMatter.style.left = `${dmStyleLeft}px`;
+	darkMatter.style.top = `${dmStyleTop}px`;
+	darkMatter_Context.clearRect(0, 0, darkMatter.width, darkMatter.height);
 
-            const fadeStartDistance = Math.max(logo.offsetWidth, logo.offsetHeight) * 2; 
-            let alpha = 1; 
-            if (distance < fadeStartDistance) { 
-                alpha = Math.max(0, distance / fadeStartDistance); 
-            } 
+	const targetXForParticles = darkMatter.width / 2;
+	const targetYForParticles = darkMatter.height / 2;
+	const currentParticleSpeed = window.innerHeight > window.innerWidth ? 15 : 20;
+	const removalThreshold = Math.min(logo.offsetWidth, logo.offsetHeight) / 2;
+	const currentMinParticleSize = 1;
+	const currentMaxParticleSize = window.innerHeight > window.innerWidth ? 2 : 4;
 
-            darkMatter_Context.beginPath(); 
-            darkMatter_Context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2); 
-            darkMatter_Context.fillStyle = isFlashingWhite ? `rgba(0, 0, 0, ${alpha})` : `rgba(255, 255, 255, ${alpha})`; 
-            darkMatter_Context.fill(); 
+	for (let i = particles.length - 1; i >= 0; i--) {
+		const particle = particles[i];
+		const dx = targetXForParticles - particle.x;
+		const dy = targetYForParticles - particle.y;
+		const distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance > 0) { 
-                const velocityX = (dx / distance) * currentParticleSpeed; 
-                const velocityY = (dy / distance) * currentParticleSpeed; 
-                particle.x += velocityX; 
-                particle.y += velocityY; 
-            } 
+		const fadeStartDistance = Math.max(logo.offsetWidth, logo.offsetHeight) * 2;
+		let alpha = 1;
+		if (distance < fadeStartDistance) {
+			alpha = Math.max(0, distance / fadeStartDistance);
+		}
 
-            if (distance < removalThreshold) { 
-                particles.splice(i, 1); 
-                const newParticle = {}; 
-                const edge = Math.floor(Math.random() * 4); 
-                switch (edge) { 
-                    case 0: newParticle.x = Math.random() * darkMatter.width; newParticle.y = 0 - currentMaxParticleSize; break; 
-                    case 1: newParticle.x = darkMatter.width + currentMaxParticleSize; newParticle.y = Math.random() * darkMatter.height; break; 
-                    case 2: newParticle.x = Math.random() * darkMatter.width; newParticle.y = darkMatter.height + currentMaxParticleSize; break; 
-                    case 3: newParticle.x = 0 - currentMaxParticleSize; newParticle.y = Math.random() * darkMatter.height; break; 
-                } 
-                newParticle.size = getRandomNumber(currentMinParticleSize, currentMaxParticleSize); 
-                particles.push(newParticle); 
-            } 
-        } 
-    } 
+		darkMatter_Context.beginPath();
+		darkMatter_Context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+		darkMatter_Context.fillStyle = isFlashingWhite ? `rgba(0, 0, 0, ${alpha})` : `rgba(255, 255, 255, ${alpha})`;
+		darkMatter_Context.fill();
 
+		if (distance > 0) {
+			const velocityX = (dx / distance) * currentParticleSpeed;
+			const velocityY = (dy / distance) * currentParticleSpeed;
+			particle.x += velocityX;
+			particle.y += velocityY;
+		}
+
+		if (distance < removalThreshold) {
+			particles.splice(i, 1);
+			const newParticle = {};
+			const edge = Math.floor(Math.random() * 4);
+			switch (edge) {
+				case 0: newParticle.x = Math.random() * darkMatter.width; newParticle.y = 0 - currentMaxParticleSize; break;
+				case 1: newParticle.x = darkMatter.width + currentMaxParticleSize; newParticle.y = Math.random() * darkMatter.height; break;
+				case 2: newParticle.x = Math.random() * darkMatter.width; newParticle.y = darkMatter.height + currentMaxParticleSize; break;
+				case 3: newParticle.x = 0 - currentMaxParticleSize; newParticle.y = Math.random() * darkMatter.height; break;
+			}
+			newParticle.size = getRandomNumber(currentMinParticleSize, currentMaxParticleSize);
+			particles.push(newParticle);
+		}
+	}
+    }
+	
     function setupBlackHoleCanvas() { 
         if (document.getElementById('blackHoleEffectCanvas')) { 
             blackHoleCanvas = document.getElementById('blackHoleEffectCanvas'); 
