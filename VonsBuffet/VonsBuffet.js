@@ -863,7 +863,9 @@ function VonsBuffet() {
         blackHoleCanvas.style.width = '100vw'; 
         blackHoleCanvas.style.height = '100vh'; 
         blackHoleCanvas.style.zIndex = '10000'; 
-        blackHoleCanvas.style.display = 'none'; 
+        blackHoleCanvas.style.display = 'none';
+		blackHoleCanvas.width = window.innerWidth;
+		blackHoleCanvas.height = window.innerHeight;
         blackHoleCtx = blackHoleCanvas.getContext('2d'); 
         if (!blackHoleCtx) { 
             console.error("Black Hole Canvas context not supported!"); 
@@ -920,7 +922,12 @@ function VonsBuffet() {
             if(cpac_Context && cpac) { 
                 cpac_Context.fillStyle = 'black'; 
                 cpac_Context.fillRect(0, 0, cpac.width, cpac.height); 
-            } 
+            }
+			
+			if (blackHoleCanvas) {
+				blackHoleCanvas.width = window.innerWidth;
+				blackHoleCanvas.height = window.innerHeight;
+			}
 
             const logoCenter = actualGetLogoScreenCenter(); 
             blackHoleAnimation.centerX = logoCenter.x; 
@@ -998,7 +1005,12 @@ function VonsBuffet() {
 
     const internalResizeHandler = () => { 
         if (typeof active_VonsBuffet !== 'undefined' && active_VonsBuffet) { 
-            positionElementsForScrolling(); 
+            positionElementsForScrolling();
+			
+			if (blackHoleCanvas) {
+				blackHoleCanvas.width = window.innerWidth;
+				blackHoleCanvas.height = window.innerHeight;
+			}
 
             document.querySelectorAll('.slideshow-container').forEach(sc => { 
                 if (sc.style.display !== 'none' && sc.style.position === 'absolute') { 
