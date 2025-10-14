@@ -756,7 +756,7 @@ function VonsBuffet() {
     // ---------------------------------------------------------------------
     let isFlashingWhite = false; // State tracker for drawing and darkMatter update
     const BLACK_DURATION = 3000; // 2 seconds for black screen
-    const WHITE_DURATION = 7000; // 7 seconds for white screen
+    const WHITE_DURATION = 6000; // 7 seconds for white screen
     let flashTimeoutId = null; // ID to manage the recursive timeout
     let prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; 
 
@@ -1079,3 +1079,4 @@ function VonsBuffet() {
         } 
     }; 
 }
+
