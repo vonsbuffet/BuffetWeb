@@ -752,7 +752,7 @@ function VonsBuffet() {
     }, 600); 
 
     let backgroundColor = 'black'; 
-    const flashInterval = 2000; let flashDuration = 7000; let isFlashingWhite = false; 
+    const flashInterval = 5000; let flashDuration = 5000; let isFlashingWhite = false; 
     let flashIntervalId = null; 
     let prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; 
     function flashBackground() { 
@@ -1049,4 +1049,5 @@ function VonsBuffet() {
         } 
     }; 
 }
+
 
