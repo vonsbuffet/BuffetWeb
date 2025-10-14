@@ -268,11 +268,11 @@ function VonsBuffet() {
 
     const vbcTitle = "VBC'c".replace(/[\n\t\r\f\v\u00A0\u2000-\u200B\u2028\u2029\uFEFF\u0000]/g, '');
     const vbcPunchline = "A universal app, guided by a universal theory.</br>VBC'c is both.".replace(/[\n\t\r\f\v\u00A0\u2000-\u200B\u2028\u2029\uFEFF\u0000]/g, '');
-    const vbcFullDetails = `*-True universal theory transcends physics, and is applicable to any system. Without such universality, it would be an incomplete theory. 
+    const vbcFullDetails = `*-True universal theory transcends physics, and is applicable to any system. Without such universality, it would be an incomplete theory. 
 	<br/><br/>VBC'c is complete. Using a calculus based on computational logic instead of numbers, VBC'c has the property of being compatible with uncertainty.-*
 	*-Every layer of its technology is mathematically consistent with the theory (the OS framework, programming language, encryption algorithm, UI logic, etc.).<br/><br/>
 	The design requirement of mathematical consistency was a test to see if VBC'c applies to useful but potentially complex systems, as a means to minimize complexity.<br/><br/>
- 	Notable technologies include: <ul><li><b>VBC'c :</b> Universal Theory / Opensource OS Framework / etc.</li><li><b>VBC DEKrypt :</b> Post-Quantum Symmetric Encryption</li><li><b>VB Currency :</b> A Revolutionary Cryptocurrency</li></ul> Each technology is a genuine breakthrough, with more unrevealed innovations integral to the platform.-*
+ 	Notable technologies include: <ul><li><b>VBC'c :</b> Universal Theory / Opensource OS Framework / etc.</li><li><b>VBC DEKrypt :</b> Post-Quantum Symmetric Encryption</li><li><b>VB Currency :</b> A Revolutionary Cryptocurrency</li></ul> Each technology is a genuine breakthrough, with more unrevealed innovations integral to the platform.-*
 	*-Developed for Android, with cross-platform expansion imminent.</br></br>
 	The mobile platform is fully programmable, supporting both GPU and CPU with GPU enabled runtime programming.</br></br>
 	Our engineered input technology proves 2 thumbs can exceed the expression rate of all 10 of your thumbs on keyboard and mouse.</br></br>
@@ -291,7 +291,7 @@ function VonsBuffet() {
 	If we consider this a computation, it's only natural to say computation principles apply to real physical systems.<br/></br>
 	When applying a computational theory (i.e. VBC'c) to physical systems, it becomes clear that spacetime operates like an extremely capable computer.<br/><br/>
 	To address this computer's intracacies, Von's Buffet designed a business model that directly benefits from knowledge in this domain:</br></br>
- 	Moving (physical) information, from point 'A' to point 'B', without information loss.-*
+ 	Moving (physical) information, from point 'A' to point 'B', without information loss.-*
 	*-Currently operating in Calgary, Alberta, Canada, we're established as the definitive solution for high-volume operations where conventional infrastructure fails and time is critical.<br/><br/>
 	We routinely move assets valued over $800,000.<br/>
 	At what cost you ask?<br/>
@@ -299,7 +299,7 @@ function VonsBuffet() {
 	*-Your existing equipment and materials can be seamlessly integrated, thereby waiving additional costs. Otherwise, these additional costs will be presented as a bill of materials, strictly covering the direct expenses.<br/><br/>
 	Von's Buffet does not profit from additional expenses; this commitment encourages us to 'lower', and eventually 'remove', all such external costs.<br/><br/>
 	Now the <span style='color:green'>$200</span>/hour... How does paying premium rates for a moving service benefit you?<br/><br/>
- 	Funds from industrial and residential asset relocation directly fuels our core research. Your investment propels our mission to architect future-proof information protection, envisioning services for natural or synthesized disaster scenarios, ensuring every intelligence remains connected.-*
+ 	Funds from industrial and residential asset relocation directly fuels our core research. Your investment propels our mission to architect future-proof information protection, envisioning services for natural or synthesized disaster scenarios, ensuring every intelligence remains connected.-*
 	*-Also, we're simply that fast!<br/><br/>Contact Von today to prepare an order.-*`.replace(/[\n\t\r\f\v\u00A0\u2000-\u200B\u2028\u2029\uFEFF\u0000]/g, '');
 
     const vbcButtonId = 'vbc-action-button-vb'; 
@@ -751,30 +751,50 @@ function VonsBuffet() {
 
     }, 600); 
 
-    let backgroundColor = 'black'; 
-    const flashInterval = 5000; let flashDuration = 5000; let isFlashingWhite = false; 
-    let flashIntervalId = null; 
+    // ---------------------------------------------------------------------
+    // REVISED FLASHING LOGIC START 
+    // ---------------------------------------------------------------------
+    let isFlashingWhite = false; // State tracker for drawing and darkMatter update
+    const BLACK_DURATION = 3000; // 2 seconds for black screen
+    const WHITE_DURATION = 7000; // 7 seconds for white screen
+    let flashTimeoutId = null; // ID to manage the recursive timeout
     let prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; 
-    function flashBackground() { 
-        if (prefersReducedMotion || (typeof active_VonsBuffet !== 'undefined' && !active_VonsBuffet)) { 
-            backgroundColor = 'white'; 
-            drawBackground(); 
-            if (flashIntervalId) { clearInterval(flashIntervalId); flashIntervalId = null; } 
-            return; 
-        } 
-        isFlashingWhite = true; 
-        backgroundColor = 'white'; 
-        setTimeout(() => { 
-            isFlashingWhite = false; 
-            backgroundColor = 'black'; 
-        }, flashDuration); 
-    } 
-    function drawBackground() { 
+
+    function drawBackground(color) { 
         if(cpac_Context && cpac) { 
-            cpac_Context.fillStyle = backgroundColor; 
+            cpac_Context.fillStyle = color; 
             cpac_Context.fillRect(0, 0, cpac.width, cpac.height); 
         } 
     } 
+    
+    function flashBlack() {
+        if (prefersReducedMotion || (typeof active_VonsBuffet !== 'undefined' && !active_VonsBuffet)) {
+            isFlashingWhite = false;
+            drawBackground('white');
+            return; // Stop the recursive calls
+        }
+
+        isFlashingWhite = false;
+        drawBackground('black'); // Screen turns black for 2 seconds
+
+        flashTimeoutId = setTimeout(flashWhite, BLACK_DURATION); // Schedule the switch to white
+    }
+
+    function flashWhite() {
+        if (prefersReducedMotion || (typeof active_VonsBuffet !== 'undefined' && !active_VonsBuffet)) {
+            isFlashingWhite = false;
+            drawBackground('white');
+            return; // Stop the recursive calls
+        }
+        
+        isFlashingWhite = true;
+        drawBackground('white'); // Screen turns white for 7 seconds
+
+        flashTimeoutId = setTimeout(flashBlack, WHITE_DURATION); // Schedule the switch back to black
+    }
+    // ---------------------------------------------------------------------
+    // REVISED FLASHING LOGIC END
+    // ---------------------------------------------------------------------
 
     function actualGetLogoScreenCenter() { 
         if (!logo) return { x: window.innerWidth / 2, y: window.innerHeight / 2 }; 
@@ -881,7 +901,7 @@ function VonsBuffet() {
         if (elapsedTime < blackHoleAnimation.duration) { 
             const progress = elapsedTime / blackHoleAnimation.duration; 
             blackHoleAnimation.currentDiameter = blackHoleAnimation.startDiameter + 
-                                                (blackHoleAnimation.endDiameter - blackHoleAnimation.startDiameter) * progress; 
+                                                 (blackHoleAnimation.endDiameter - blackHoleAnimation.startDiameter) * progress; 
             blackHoleCtx.clearRect(0, 0, blackHoleCanvas.width, blackHoleCanvas.height); 
             blackHoleCtx.fillStyle = 'black'; 
             blackHoleCtx.beginPath(); 
@@ -895,7 +915,9 @@ function VonsBuffet() {
             if (typeof active_VonsBuffet !== 'undefined') active_VonsBuffet = false; 
             console.log("active_VonsBuffet is now false. VonsBuffet black hole complete. Transitioning to Star scene."); 
 
-            if (flashIntervalId) { clearInterval(flashIntervalId); flashIntervalId = null; } 
+            // Clear the existing flash timeout before transition
+            if (flashTimeoutId) { clearTimeout(flashTimeoutId); flashTimeoutId = null; } 
+            
             if (logo) logo.style.opacity = '0'; 
             if(aboveLogoTextDiv) aboveLogoTextDiv.style.opacity = '0'; 
             if(belowLogoTextDiv1) belowLogoTextDiv1.style.opacity = '0'; 
@@ -918,7 +940,9 @@ function VonsBuffet() {
             if ((typeof active_VonsBuffet !== 'undefined' && !active_VonsBuffet) || blackHoleAnimation.isActive || !blackHoleCanvas) return; 
             console.log("VBLogo clicked - initiating black hole sequence."); 
             isFlashingWhite = false; 
-            if (flashIntervalId) { clearInterval(flashIntervalId); flashIntervalId = null; } 
+            // Clear the flash timeout on click
+            if (flashTimeoutId) { clearTimeout(flashTimeoutId); flashTimeoutId = null; } 
+            
             if(cpac_Context && cpac) { 
                 cpac_Context.fillStyle = 'black'; 
                 cpac_Context.fillRect(0, 0, cpac.width, cpac.height); 
@@ -944,7 +968,7 @@ function VonsBuffet() {
 
     function animate() { 
         if (typeof active_VonsBuffet !== 'undefined' && active_VonsBuffet) { 
-            drawBackground(); 
+            // drawBackground() is now called by flashBlack/flashWhite
             const textColor = isFlashingWhite ? 'black' : 'white'; 
 
             [aboveLogoTextDiv, belowLogoTextDiv1].forEach(panel => { 
@@ -995,12 +1019,18 @@ function VonsBuffet() {
     } 
 
     setupBlackHoleCanvas(); 
+    
+    // ---------------------------------------------------------------------
+    // REVISED FLASHING INITIALIZATION
+    // ---------------------------------------------------------------------
     if(!prefersReducedMotion && typeof active_VonsBuffet !== 'undefined' && active_VonsBuffet) { 
-        if (flashIntervalId) clearInterval(flashIntervalId); 
-        flashIntervalId = setInterval(flashBackground, flashInterval); 
-    } else if (flashIntervalId) { 
-        clearInterval(flashIntervalId); flashIntervalId = null; 
+        if (flashTimeoutId) clearTimeout(flashTimeoutId); 
+        flashBlack(); // START the recursive timeout sequence
+    } else if (flashTimeoutId) { 
+        clearTimeout(flashTimeoutId); flashTimeoutId = null; 
     } 
+    // ---------------------------------------------------------------------
+
     animate(); 
 
     const internalResizeHandler = () => { 
@@ -1049,5 +1079,3 @@ function VonsBuffet() {
         } 
     }; 
 }
-
-
