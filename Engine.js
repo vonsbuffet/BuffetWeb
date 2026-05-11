@@ -517,8 +517,8 @@ function draw() {
             uiCtx.fillText(label, hx, hy + 65);
         };
 
-        renderBinaryHole(ax, ay, "Android OS", "rgba(61, 220, 132, 0.9)"); 
-        renderBinaryHole(ix, iy, "iOS Platform", "rgba(0, 122, 255, 0.9)"); 
+        renderBinaryHole(ax, ay, "Android", "rgba(61, 220, 132, 0.9)"); 
+        renderBinaryHole(ix, iy, "iOS", "rgba(0, 122, 255, 0.9)"); 
     }
 
     // ==========================================
